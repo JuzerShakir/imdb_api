@@ -3,7 +3,7 @@ class CreateShowJob < ApplicationJob
     include ConnectToImdb, ExtractMetadata
 
     def perform(url)
-        @url = url
+        @url = url.match(/(\Ahttps:\/\/www.imdb.com\/title\/tt\d{7})/i)[0]
         @identifier = get_identifier
         connect_n_fetch
         set_show if content_type_supported? && ratings_exists? && Entertainment.find_by(identifier: @identifier).nil?
