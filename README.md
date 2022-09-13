@@ -37,6 +37,34 @@ Following gems were required to accomplish the tasks of the project:
 
 ---
 
+## Entertainments Table Schema
+
+|  **Attribute**   | **Type** |
+| :--------------: | :------: |
+|    **title**     |  string  |
+|    **rating**    |  float   |
+|   **tagline**    |  string  |
+|    **story**     |  string  |
+| **release_date** | datetime |
+|  **popularity**  |  string  |
+|     **type**     |  string  |
+|  **identifier**  |  string  |
+|   **runtime**    | integer  |
+|   **revenue**    |  string  |
+|    **budget**    |  string  |
+|     **url**      |  string  |
+
+```
+has_and_belongs_to_many :genres
+has_and_belongs_to_many :stars
+has_and_belongs_to_many :producers
+has_and_belongs_to_many :directors
+```
+
+`Genre`, `Star`, `Producer` & `Director` tables each have a single attribute called `name`.
+
+---
+
 ## ⚙️ Setting up a PostgreSQL user
 
 If you don't have a user set on postgres, here's how to set new user:
@@ -106,6 +134,8 @@ Hit `ctrl + s` to save and then close the `credential.yml` file from the editor.
 ```
 Rails.application.credentials.dig(:database, :username)
 ```
+
+Create database:
 
 ```bash
 rails db:create
