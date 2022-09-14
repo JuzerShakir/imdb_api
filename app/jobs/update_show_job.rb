@@ -9,12 +9,14 @@ class UpdateShowJob < ApplicationJob
 
         connect_n_fetch
 
-        get_attributes = %i(ratings popularity revenue budget)
-        set_attributes = [get_ratings, get_popularity, get_revenue, get_budget]
-        updated_attributes = get_attributes.zip(set_attributes).to_h
-
-        @show.update( updated_attributes )
-
+        @show.update( set_show_values )
         @browser.close
+    end
+
+    private
+    def set_show_values
+        keys = %i(ratings popularity revenue budget)
+        values = [get_ratings, get_popularity, get_revenue, get_budget]
+        keys.zip(values).to_h
     end
 end
