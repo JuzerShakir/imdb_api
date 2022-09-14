@@ -1,6 +1,5 @@
 class UpdateShowJob < ApplicationJob
     queue_as :default
-    include ConnectAndValidate, ExtractMetadata
 
     def perform(identifier)
         @identifier = identifier
