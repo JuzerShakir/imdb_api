@@ -160,3 +160,11 @@ Creating a POST request, which will create new instances in multiple tables in d
 ```bash
 curl --request POST --header "Content-Type: application/json" --data '{"url": "https://www.imdb.com/title/tt0944947/"}' http://localhost:3000/api/entertainment -v
 ```
+
+Update an existing entry of Movie or Tv-Series instance with:
+
+```bash
+curl --request PATCH --header "Content-Type: application/json" --data '{"identifier": "tt0306414"}' http://localhost:3000/api/entertainment -v
+```
+
+Which updates following attributes: `ratings`, `popularity`, `budget`, `revenue`
