@@ -33,7 +33,11 @@
         def get_release_date
             if @browser.link(text: "Release date").present?
                 attrb = set_attr("title-details-releasedate")
-                Date.parse(extract_data(:li, attrb, :text, :lines, :last))
+                begin
+                    Date.parse(extract_data(:li, attrb, :text, :lines, :last))
+                rescue ArgumentError
+                    nil
+                end
             end
         end
 
