@@ -44,7 +44,6 @@ Following gems were required to accomplish the tasks of the project:
 |    **title**     |  string  |
 |    **rating**    |  float   |
 |   **tagline**    |  string  |
-|    **story**     |  string  |
 | **release_date** | datetime |
 |  **popularity**  |  string  |
 |     **type**     |  string  |
