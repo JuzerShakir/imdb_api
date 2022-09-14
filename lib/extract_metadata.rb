@@ -65,7 +65,7 @@
            attrb = set_attr("plot-xl")
            # @browser.window.maximize
            html = extract_data(:span, attrb, :html)
-           html.scan(/>([a-z ,.'ä]+)/i).flatten.pop
+           html.scan(/>([a-z ,.'ä-]+)/i).flatten.pop
         end
 
         # * 11 storyline
