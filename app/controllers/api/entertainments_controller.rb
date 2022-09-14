@@ -26,7 +26,7 @@ module Api
 
             def show_exists?
                 @identifier = get_identifier
-                Entertainment.find_by(identifier: @identifier).persisted?
+                Entertainment.exists?(identifier: @identifier)
             end
 
             # * 15 Unique IMDb Id
