@@ -1,4 +1,4 @@
-    module ConnectToImdb
+    module ConnectAndValidate
         def connect_n_fetch
             @browser = Watir::Browser.new :chrome, headless: true
             @browser.goto @url
@@ -28,5 +28,9 @@
 
         def content_type_supported?
             content_type.match?(/\A(\d+|TV)/)
+        end
+
+        def valid_content?
+            content_type_supported? && ratings_exists?
         end
     end

@@ -94,9 +94,4 @@
             html = extract_data(:li, attrb, :div, :ul)
             html.map(&:text)
         end
-
-        # * 15 Unique IMDb Id
-        def get_identifier
-            @url.match(/(tt\d{7})/)[0]
-        end
     end

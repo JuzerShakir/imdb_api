@@ -1,12 +1,12 @@
 class CreateShowJob < ApplicationJob
     queue_as :default
-    include ConnectToImdb, ExtractMetadata
+    include ConnectAndValidate, ExtractMetadata
 
-    def perform(url)
+    def perform(url, identifier)
         @url = url.match(/(\Ahttps:\/\/www.imdb.com\/title\/tt\d{7})/i)[0]
-        @identifier = get_identifier
+        @identifier = identifier
         connect_n_fetch
-        set_show if content_type_supported? && ratings_exists? && Entertainment.find_by(identifier: @identifier).nil?
+        set_show if valid_content?
         @browser.close
     end
 
