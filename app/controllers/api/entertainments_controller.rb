@@ -1,11 +1,11 @@
 module Api
     class EntertainmentsController < ApplicationController
         def create
-            @url = entertainment_params[:url]
+            @url = create_show_params[:url]
 
             if invalid_url?
                 render json: { error: "Invalid URL" }, status: :unprocessable_entity
-            elsif show_exists?
+            elsif show_exists?(get_identifier)
                 render json: { error: "show already exists!" }, status: :unprocessable_entity
             else
                 CreateShowJob.perform_later(@url, @identifier)
@@ -13,9 +13,24 @@ module Api
             end
         end
 
-        private
+        def update
+            identifier = update_show_params[:identifier]
 
-            def entertainment_params
+            if show_exists?(identifier)
+                UpdateShowJob.perform_later(identifier)
+                render json: "Features are updating.", status: :ok
+            else
+                error_message = { error: "Show doesn't exist with this id!" }
+                render json: error_message, status: :unprocessable_entity
+            end
+        end
+
+        private
+            def update_show_params
+                params.require(:entertainment).permit(:identifier)
+            end
+
+            def create_show_params
                 params.require(:entertainment).permit(:url)
             end
 
@@ -24,8 +39,8 @@ module Api
                 !@url.match?(valid_url)
             end
 
-            def show_exists?
-                @identifier = get_identifier
+            def show_exists?(identifier)
+                @identifier = identifier
                 Entertainment.exists?(identifier: @identifier)
             end
 
