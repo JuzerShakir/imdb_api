@@ -16,7 +16,7 @@ A Rails API extracting movie or tv-series data from the IMDb website via a link 
 - [x] Using `Watir` & `Webdriver` gem to extract data from IMDb website.
 - [x] User can create new entries in db by providing the correct URL.
 - [x] URLs only from IMDb website are supported and being specific, only of a Movie or TV-Series which has the feature to rating it. URLs of games, actors or episodes of TV-series are not supported.
-- [ ] Existing data can also be updated via `update` action.
+- [x] Existing data can also be updated via `update` action.
 - [ ] Users can instantly instantiate data in database via `seed.rb` file.
 - [ ] Provide business logic.
 
@@ -121,12 +121,12 @@ EDITOR="code --wait" rails credentials:edit
 _`code` for Visual Studio Code_
 _`subl` for sublime_
 
-This will open `crendetial.yml` file and enter credential as follows in it:
+This will open `credential.yml` file and enter credential as follows in it:
 
 ```
 database:
   username: your_username
-  passwordt: your_password
+  password: your_password
 ```
 
 Hit `ctrl + s` to save and then close the `credential.yml` file from the editor. This will save the credentials. To check if it did save, run the following inside rails console:
