@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_14_111811) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_14_163042) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,7 +30,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_14_111811) do
     t.string "title"
     t.float "ratings"
     t.string "tagline"
-    t.string "story"
     t.datetime "release_date"
     t.string "popularity"
     t.string "type"

@@ -16,9 +16,9 @@ class CreateShowJob < ApplicationJob
 
     private
         def set_show_values
-            keys = %i(identifier title ratings runtime release_date revenue budget tagline story popularity url)
+            keys = %i(identifier title ratings runtime release_date revenue budget tagline popularity url)
             values = [@identifier, get_title, get_ratings, get_runtime, get_release_date, get_revenue,
-                get_budget, get_tagline, get_story, get_popularity, @url]
+                get_budget, get_tagline, get_popularity, @url]
 
             keys.zip(values).to_h
         end

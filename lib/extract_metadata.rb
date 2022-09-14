@@ -68,12 +68,6 @@
            html.scan(/>([a-z0-9 ,.'ä:$-]+)/i).flatten.pop
         end
 
-        # * 11 storyline
-        def get_story
-            attrb = set_attr("storyline-plot-summary")
-            extract_data(:div, attrb, :text)
-        end
-
         # * 12 total users rated
         def get_popularity
             attrb = { css: ".sc-7ab21ed2-3.dPVcnq" }
