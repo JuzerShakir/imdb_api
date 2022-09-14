@@ -28,6 +28,7 @@ class CreateShowJob < ApplicationJob
         end
 
         def set_relations(genres, stars, producers, directors)
+            @browser.close
             set_genres(genres)
             set_stars(stars)
             set_producers(producers)
