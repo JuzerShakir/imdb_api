@@ -4,6 +4,7 @@ class CreateShowJob < ApplicationJob
 
     def perform(url, identifier)
         @url = url.match(/(\Ahttps:\/\/www.imdb.com\/title\/tt\d{7})/i)[0]
+        @identifier = identifier
         connect_n_fetch
         save_show if valid_content?
     end
@@ -17,7 +18,7 @@ class CreateShowJob < ApplicationJob
     private
         def set_show_values
             keys = %i(identifier title ratings runtime release_date revenue budget tagline story popularity url)
-            values = [get_identifier, get_title, get_ratings, get_runtime, get_release_date, get_revenue,
+            values = [@identifier, get_title, get_ratings, get_runtime, get_release_date, get_revenue,
                 get_budget, get_tagline, get_story, get_popularity, @url]
 
             keys.zip(values).to_h
