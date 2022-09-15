@@ -39,7 +39,7 @@ files.each do | file |
 
     show_batches.each_with_index do | show_batch, i |
         show_batch.each do | show |
-            @url = show
+            @url = trim_url(show)
             @identifier = @url.match(/(tt\d{7})/)[0]
             connect_n_fetch
             @show = content_type == "TV" ? TvShow.new : Movie.new

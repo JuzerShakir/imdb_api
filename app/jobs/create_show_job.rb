@@ -2,7 +2,7 @@ class CreateShowJob < ApplicationJob
     queue_as :default
 
     def perform(url, identifier)
-        @url = url.match(/(\Ahttps:\/\/www.imdb.com\/title\/tt\d{7})/i)[0]
+        @url = trim_url(url)
         @identifier = identifier
         connect_n_fetch
         save_show if valid_content?

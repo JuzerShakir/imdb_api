@@ -5,6 +5,11 @@
             extract_data(:h1, attrb, :text)
         end
 
+        # * 15 Extract portion of URL which is important
+        def trim_url url
+            url.match(/(\Ahttps:\/\/www.imdb.com\/title\/tt\d{7})/i)[0]
+        end
+
         # * 2 rating
         def get_ratings
             attrb = set_attr("hero-rating-bar__aggregate-rating__score")
