@@ -154,6 +154,8 @@ After setting up all this, you're ready to use this webapp.
 
 ## Feed Data
 
+### Custom
+
 Creating a POST request, which will create new instances in multiple tables in db:
 
 ```bash
@@ -167,3 +169,27 @@ curl --request PATCH --header "Content-Type: application/json" --data '{"identif
 ```
 
 Which updates following attributes: `ratings`, `popularity`, `budget`, `revenue`
+
+---
+
+### Via Seed
+
+You can feed the database with 500 shows, 250 links of each Movie & TV-Series, with a single `rails db:seed` command.
+
+The links are provided in the `lib/seed_data` folder which contains 2 files, `movie_links.txt` & `tv-series_links.txt`, where each file contains links of Top 250 [Movies](https://www.imdb.com/chart/top/?ref_=nv_mv_250) and [TV-Series](https://www.imdb.com/chart/toptv/?ref_=nv_tvv_250) according to IMDb ratings.
+
+The files, `movie_links.txt` & `tv-series_links.txt`, are already loaded in `seed.rb` file, and all you have to do is run `rails db:seed` command to start populating data to the database.
+
+#### Few things to note before running `rails db:seed`
+
+1.  `rails db:seed` command will first destroy all the instances of all tables, if it exists, and then populate the data. So if you don't want that you can comment out that part from the `seed.rb` file. But if you do, note that you might run into an error while seeding the data if any shows mentioned in those 2 files already exist in your database.
+
+2.  Fetching a link, extracting data and persisting to it to the database takes around ~5 secs. Calculating time for all 500 shows to execute, since the `seed.rb` will run both files, would take around ~2500 secs (~42 mins).
+
+3.  The seed file doesn't execute all 500 links one after the other, it has been divided in batches of 30 links and after execution of each batch the program has been made to sleep for 30 seconds to avoid 'Are you a robot' check from the browser. **So, the total time to execute all 500 shows will be ~50 mins.**
+
+4.  This process might heat up your system or even hang if you have other heavy programs running depending on your system specifications.
+
+5.  If you don't want to initialize all 250 shows from each file then I have provided a constant `N` in `seeds.rb` file which you can change to however many shows you want to populate in your database. **By default, the value of `N` is set to `60` which means total shows executed will be 120, 60 from each file, which would take around 10 mins to execute.**
+
+---
