@@ -1,7 +1,13 @@
     module ConnectAndValidate
-        def connect_n_fetch
+        def connect_n_fetch(url)
+            @url = trim_url(url)
             @browser = Watir::Browser.new :chrome, headless: true
             @browser.goto @url
+        end
+
+        # * Extract portion of URL which is important
+        def trim_url url
+            url.match(/(\Ahttps:\/\/www.imdb.com\/title\/tt\d{7})/i)[0]
         end
 
         def extract_data(tag, attrb, *methods)
@@ -30,7 +36,7 @@
             content_type.match?(/\A(\d+|TV)/)
         end
 
-        def valid_content?
+        def content_is_valid?
             content_type_supported? && ratings_exists?
         end
     end

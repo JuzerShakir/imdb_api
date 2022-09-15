@@ -1,4 +1,4 @@
-include ConnectAndValidate, ExtractMetadata
+include ConnectAndValidate, ExtractFeatures, ExtractRelationalFeatures, SetFeatures
 
 if Entertainment.exists?
     models = %w(Entertainment Genre Star Producer Director)
@@ -17,17 +17,11 @@ files.each do | file |
     total_batches = show_batches.count
 
     show_batches.each_with_index do | show_batch, i |
-        show_batch.each do | show |
-            @url = trim_url(show)
-            @identifier = @url.match(/(tt\d{7})/)[0]
-            connect_n_fetch
-            @show = content_type == "TV" ? TvShow.new : Movie.new
-            @show.update( set_show_values )
-            @show.save
-            relational_data = [get_genres, get_stars, get_producers, get_directors]
+        show_batch.each do | show_url |
+            connect_n_fetch(show_url)
+            set_show_values
             @browser.close
-            @show.method("set_relations").call(relational_data)
         end
-        sleep(30) if show_batch.count == 30 && i == total_batches
+        sleep(30) if show_batch.count == 30 && i+1 != total_batches
     end
 end

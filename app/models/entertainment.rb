@@ -9,10 +9,10 @@ class Entertainment < ApplicationRecord
 
     private
 
-    def set_relations(relatinal_data)
+    def set_relations(relational_data)
         with_models = %w(Genre Star Producer Director)
 
-        relatinal_data.each_with_index { | relation, i |
+        relational_data.each_with_index { | relation, i |
             model = with_models[i]
             associated = self.instance_eval("#{model.downcase}s")
 

@@ -1,30 +1,23 @@
-    module ExtractMetadata
+    module ExtractFeatures
         # * 1 title
         def get_title
             attrb = set_attr("hero-title-block__title")
             extract_data(:h1, attrb, :text)
         end
 
-        # * 15 Extract portion of URL which is important
-        def trim_url url
-            url.match(/(\Ahttps:\/\/www.imdb.com\/title\/tt\d{7})/i)[0]
+        # * 2 Unique IMDb Id
+        def get_identifier
+            @url.match(/(tt\d{7})/)[0]
         end
 
-        # * 2 rating
+        # * 3 rating
         def get_ratings
             attrb = set_attr("hero-rating-bar__aggregate-rating__score")
             html = extract_data(:div, attrb, :span, :html)
             html.scan(/\d[.]{1}\d/).pop.to_f
         end
 
-        # * 4 director name
-        def get_directors
-            attrb = set_attr("title-pc-principal-credit")
-            html = extract_data(:li, attrb, :html)
-            html.scan(/([a-z .]+)<\/a>/i).flatten
-        end
-
-        # * 5 runtime in minutes
+        # * 4 runtime in minutes
         def get_runtime
             if @browser.span(text: "Runtime").present? &&
                 attrb = set_attr("title-techspec_runtime")
@@ -34,7 +27,7 @@
             end
         end
 
-        # * 6 release_date
+        # * 5 release_date
         def get_release_date
             if @browser.link(text: "Release date").present?
                 attrb = set_attr("title-details-releasedate")
@@ -46,6 +39,14 @@
             end
         end
 
+        # * 6 revenue
+        def get_revenue
+            if @browser.span(text: "Gross worldwide").present?
+                attrb = set_attr("title-boxoffice-cumulativeworldwidegross")
+                extract_data(:li, attrb, :li, :text, :split, :first)
+            end
+        end
+
         # * 7 budget
         def get_budget
             if @browser.span(text: "Budget").present?
@@ -54,22 +55,7 @@
             end
         end
 
-        # * 8 revenue
-        def get_revenue
-            if @browser.span(text: "Gross worldwide").present?
-                attrb = set_attr("title-boxoffice-cumulativeworldwidegross")
-                extract_data(:li, attrb, :li, :text, :split, :first)
-            end
-        end
-
-        # * 9 genres
-        def get_genres
-            attrb = set_attr("genres")
-            html = extract_data(:div, attrb, :text)
-            html.gsub("\n", ' ').split
-        end
-
-        # * 10 tagline
+        # * 8 tagline
         def get_tagline
            attrb = set_attr("plot-xl")
            # @browser.window.maximize
@@ -77,32 +63,10 @@
            html.scan(/>([a-z0-9 ,.'ä:$-]+)/i).flatten.pop
         end
 
-        # * 12 total users rated
+        # * 9 total users rated
         def get_popularity
             attrb = { css: ".sc-7ab21ed2-3.dPVcnq" }
             html = extract_data(:div, attrb, :html)
             html.scan(/>([0-9.M|K]+)/).flatten.pop
-        end
-
-        # * 13 stars
-        def get_stars
-            attrb = set_attr("title-cast-item__actor")
-            html = extract_data(:as, attrb, :map)
-            html.each(&:text)
-        end
-
-        # * 14 production companies
-        def get_producers
-            attrb = set_attr("title-details-companies")
-            html = extract_data(:li, attrb, :div, :ul)
-            html.map(&:text)
-        end
-
-        def set_show_values
-            keys = %i(identifier title ratings runtime release_date revenue budget tagline popularity url)
-            values = [@identifier, get_title, get_ratings, get_runtime, get_release_date, get_revenue,
-                        get_budget, get_tagline, get_popularity, @url]
-
-            keys.zip(values).to_h
         end
     end

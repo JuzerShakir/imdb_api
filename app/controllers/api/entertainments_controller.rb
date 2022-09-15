@@ -5,10 +5,10 @@ module Api
 
             if invalid_url?
                 render json: { error: "Invalid URL" }, status: :unprocessable_entity
-            elsif show_exists?(get_identifier)
+            elsif show_exists?
                 render json: { error: "show already exists!" }, status: :unprocessable_entity
             else
-                CreateShowJob.perform_later(@url, @identifier)
+                CreateShowJob.perform_later(@url)
                 render json: "Valid URL", status: :accepted
             end
         end
@@ -39,14 +39,8 @@ module Api
                 !@url.match?(valid_url)
             end
 
-            def show_exists?(identifier)
-                @identifier = identifier
-                Entertainment.exists?(identifier: @identifier)
-            end
-
-            # * 15 Unique IMDb Id
-            def get_identifier
-                @url.match(/(tt\d{7})/)[0]
+            def show_exists?
+                Entertainment.exists?(identifier: @url.match(/(tt\d{7})/)[0])
             end
     end
 end
