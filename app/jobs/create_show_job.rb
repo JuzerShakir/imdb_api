@@ -9,8 +9,9 @@ class CreateShowJob < ApplicationJob
     end
 
     after_perform do
-        set_relations(get_genres, get_stars, get_producers, get_directors) if @show.persisted?
+        relational_data = [get_genres, get_stars, get_producers, get_directors]
         @browser.close
+        @show.method("set_relations").call(relational_data) if @show.persisted?
     end
 
     private
@@ -25,17 +26,5 @@ class CreateShowJob < ApplicationJob
         def save_show
             @show = content_type == "TV" ? TvShow.new : Movie.new
             @show.update( set_show_values )
-        end
-
-        def set_relations(*arrays)
-            models = %w(Genre Star Producer Director)
-            arrays.each_with_index { | arr, i |
-                model = models[i]
-                relation = @show.instance_eval("#{model.downcase}s")
-                arr.each { |e|
-                    instance = model.constantize.find_by(name: e)
-                    instance.nil? ? relation.create(name: e) : relation << instance
-                }
-            }
         end
 end

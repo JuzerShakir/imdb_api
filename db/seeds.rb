@@ -13,20 +13,7 @@ def set_show_values
     keys.zip(values).to_h
 end
 
-def set_relations(*arrays)
-    @browser.close
-    models = %w(Genre Star Producer Director)
-    arrays.each_with_index { | arr, i |
-        model = models[i]
-        relation = @show.instance_eval("#{model.downcase}s")
-        arr.each { |e|
-            instance = model.constantize.find_by(name: e)
-            instance.nil? ? relation.create(name: e) : relation << instance
-        }
-    }
-end
-
-N = 60
+N = 1
 
 files = %w(movie_links.txt tv-series_links.txt)
 
@@ -45,7 +32,9 @@ files.each do | file |
             @show = content_type == "TV" ? TvShow.new : Movie.new
             @show.update( set_show_values )
             @show.save
-            set_relations(get_genres, get_stars, get_producers, get_directors)
+            relational_data = [get_genres, get_stars, get_producers, get_directors]
+            @browser.close
+            @show.method("set_relations").call(relational_data)
         end
         sleep(30) if show_batch.count == 30 && i == total_batches
     end
