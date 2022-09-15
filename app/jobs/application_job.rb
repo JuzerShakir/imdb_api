@@ -1,5 +1,5 @@
 class ApplicationJob < ActiveJob::Base
-  include ConnectAndValidate, ExtractFeatures, ExtractRelationalFeatures, SetFeatures
+  include ConnectAndValidate, ExtractFeatures, ExtractRelationalFeatures, SetFeatures, UpdateFeatures
   # Automatically retry jobs that encountered a deadlock
   # retry_on ActiveRecord::Deadlocked
 

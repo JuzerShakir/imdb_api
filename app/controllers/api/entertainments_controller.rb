@@ -14,10 +14,10 @@ module Api
         end
 
         def update
-            identifier = update_show_params[:identifier]
+            @identifier = update_show_params[:identifier]
 
-            if show_exists?(identifier)
-                UpdateShowJob.perform_later(identifier)
+            if show_exists?
+                UpdateShowJob.perform_later(@identifier)
                 render json: "Features are updating.", status: :ok
             else
                 error_message = { error: "Show doesn't exist with this id!" }
@@ -40,7 +40,7 @@ module Api
             end
 
             def show_exists?
-                Entertainment.exists?(identifier: @url.match(/(tt\d{7})/)[0])
+                Entertainment.exists?(identifier:  @identifier || @url.match(/(tt\d{7})/)[0] )
             end
     end
 end
