@@ -5,14 +5,6 @@ if Entertainment.exists?
     models.each { |model| model.constantize.destroy_all }
 end
 
-def set_show_values
-    keys = %i(identifier title ratings runtime release_date revenue budget tagline popularity url)
-    values = [@identifier, get_title, get_ratings, get_runtime, get_release_date, get_revenue,
-                get_budget, get_tagline, get_popularity, @url]
-
-    keys.zip(values).to_h
-end
-
 N = 1
 
 files = %w(movie_links.txt tv-series_links.txt)
