@@ -9,7 +9,6 @@ class CreateShowJob < ApplicationJob
     end
 
     after_perform do
-        # relational_attrbs = [get_genres, get_stars, get_producers, get_directors]
         set_relations(get_genres, get_stars, get_producers, get_directors) if @show.persisted?
         @browser.close
     end
@@ -39,11 +38,4 @@ class CreateShowJob < ApplicationJob
                 }
             }
         end
-
-        # def set_genres(genres)
-        #     genres.each do |genre|
-        #         instance = Genre.find_by(name: genre)
-        #         instance.nil? ? @show.genres.create(name: genre) : @show.genres << instance
-        #     end
-        # end
 end
