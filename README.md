@@ -55,34 +55,6 @@ has_and_belongs_to_many :directors
 
 ---
 
-## ⚙️ Setting up a PostgreSQL user
-
-If you don't have a user set on postgres, here's how to set new user:
-
-```bash
-sudo -u postgres createuser -s [username]
-```
-
-To set a password for this user, log in to the PostgreSQL command line client:
-
-```bash
-sudo -u postgres psql
-```
-
-Enter the following command to set the password:
-
-```bash
-\password your_password
-```
-
-Enter and confirm the password. Then exit the PostgreSQL client:
-
-```bash
-\q
-```
-
----
-
 ## 📋 Execution
 
 Run the following commands to execute locally:
@@ -98,8 +70,6 @@ cd imdb_api
 
 bundle install
 ```
-
-#### 💡 Imp Note:
 
 To successfully create development and test database, you will need to update `config.database.yml` file with correct postgresql username and password.
 To edit the it without exposing your credentials, give the following command:
