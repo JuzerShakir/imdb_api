@@ -34,6 +34,8 @@ A Rails API extracting a Movie or Tv-Series data from the IMDb website via a lin
   <img src="public/assets/schema.png" />
 </div>
 
+### Our Entertainment Model
+
 |  **Attribute**   |                                       **Desc**                                        |
 | :--------------: | :-----------------------------------------------------------------------------------: |
 |    **title**     |                            Title of the movie or TV-Series                            |
