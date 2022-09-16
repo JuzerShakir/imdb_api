@@ -17,7 +17,7 @@ A Rails API extracting movie or tv-series data from the IMDb website via a link 
 - [x] User can create new entries in db by providing the correct URL.
 - [x] URLs only from IMDb website are supported and being specific, only of a Movie or TV-Series which has the feature to rating it. URLs of games, actors or episodes of TV-series are not supported.
 - [x] Existing data can also be updated via `update` action.
-- [ ] Users can instantly instantiate data in database via `seed.rb` file.
+- [x] Users can instantly instantiate data in database via `seed.rb` file.
 - [ ] Provide business logic.
 
 ---
