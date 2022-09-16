@@ -1,6 +1,6 @@
 # Project: IMDb API
 
-A Rails API extracting movie or tv-series data from the IMDb website via a link provided by the user which is persisted to the database.
+A Rails API extracting a Movie or Tv-Series data from the IMDb website via a link provided by the user which is then persisted to the database.
 
 <div align="center">
   <img src="public/assets/project_logo.png" />
@@ -12,12 +12,16 @@ A Rails API extracting movie or tv-series data from the IMDb website via a link 
 
 ## ❗ Overview
 
-- [x] Using PostgreSQL database to store data.
-- [x] Using `Watir` & `Webdriver` gem to extract data from IMDb website.
+- [x] Using PostgreSQL database to store the data.
+- [x] Using the `Watir` & `Webdriver` gem to extract data from IMDb website.
 - [x] User can create new entries in db by providing the correct URL.
-- [x] URLs only from IMDb website are supported and being specific, only of a Movie or TV-Series which has the feature to rating it. URLs of games, actors or episodes of TV-series are not supported.
+- [x] Checks if the user input is a valid IMDb URL.
+- [x] After validating URL, the process is passed to ActiveJob.
+- [x] Checks if the content of a URL is a Movie or TV-Series.
+- [x] Checks if the content has support to rate the show.
+- [x] If all checks pass then the data extraction process begins and saves it to the database.
 - [x] Existing data can also be updated via `update` action.
-- [x] Users can instantly instantiate data in database via `seed.rb` file.
+- [x] Users can also instantly instantiate data to the database via `seeds.rb` file.
 - [ ] Provide business logic.
 
 ---
@@ -39,19 +43,19 @@ Following gems were required to accomplish the tasks of the project:
 
 ## Entertainments Table Schema
 
-|  **Attribute**   | **Type** |
-| :--------------: | :------: |
-|    **title**     |  string  |
-|    **rating**    |  float   |
-|   **tagline**    |  string  |
-| **release_date** | datetime |
-|  **popularity**  |  string  |
-|     **type**     |  string  |
-|  **identifier**  |  string  |
-|   **runtime**    | integer  |
-|   **revenue**    |  string  |
-|    **budget**    |  string  |
-|     **url**      |  string  |
+|  **Attribute**   |                                       **Desc**                                        | **Type** |
+| :--------------: | :-----------------------------------------------------------------------------------: | :------: |
+|    **title**     |                            Title of the movie or TV-Series                            |  string  |
+|    **rating**    |                            Ratings of the respective show                             |  float   |
+|   **tagline**    |                             A short overview of the show                              |  string  |
+| **release_date** |                               Release date of the show                                | datetime |
+|  **popularity**  |                     Number of IMDb users who have rated the show                      |  string  |
+|     **type**     |      An STI attribute, a show can either be an instance of a `Movie` or `TvShow`      |  string  |
+|  **identifier**  | An unique IMDb id that starts with `tt` followed by exactly 7 digits found in the URL |  string  |
+|   **runtime**    |                               Total runtime of a show.                                | integer  |
+|   **revenue**    |                               Total revenue of the show                               |  string  |
+|    **budget**    |                               Total budget of the show                                |  string  |
+|     **url**      |                                    URL of the show                                    |  string  |
 
 ```
 has_and_belongs_to_many :genres
@@ -154,9 +158,16 @@ After setting up all this, you're ready to use this webapp.
 
 ## Feed Data
 
-### Custom
+### Manually
 
-Creating a POST request, which will create new instances in multiple tables in db:
+Make sure first you instantiate rails server and sidekiq:
+
+```bash
+rails server
+sidekiq
+```
+
+Create a POST request that will create a new instance in Entertainment table and others with HABTM relationship:
 
 ```bash
 curl --request POST --header "Content-Type: application/json" --data '{"url": "https://www.imdb.com/title/tt0944947/"}' http://localhost:3000/api/entertainment -v
@@ -174,22 +185,20 @@ Which updates following attributes: `ratings`, `popularity`, `budget`, `revenue`
 
 ### Via Seed
 
-You can feed the database with 500 shows, 250 links of each Movie & TV-Series, with a single `rails db:seed` command.
-
 The links are provided in the `lib/seed_data` folder which contains 2 files, `movie_links.txt` & `tv-series_links.txt`, where each file contains links of Top 250 [Movies](https://www.imdb.com/chart/top/?ref_=nv_mv_250) and [TV-Series](https://www.imdb.com/chart/toptv/?ref_=nv_tvv_250) according to IMDb ratings.
 
-The files, `movie_links.txt` & `tv-series_links.txt`, are already loaded in `seed.rb` file, and all you have to do is run `rails db:seed` command to start populating data to the database.
+You can feed the database with 500 shows with a single `rails db:seed` command.
 
-#### Few things to note before running `rails db:seed`
+**Few things to note before running `rails db:seed`**
 
-1.  `rails db:seed` command will first destroy all the instances of all tables, if it exists, and then populate the data. So if you don't want that you can comment out that part from the `seed.rb` file. But if you do, note that you might run into an error while seeding the data if any shows mentioned in those 2 files already exist in your database.
+1. Depending on your system specifications, this process might heat up your system or even hang if you have other heavy programs running simultaneously.
 
-2.  Fetching a link, extracting data and persisting to it to the database takes around ~5 secs. Calculating time for all 500 shows to execute, since the `seed.rb` will run both files, would take around ~2500 secs (~42 mins).
+2. It will first destroy all the instances from all the tables, if it exists, and then populate the data. If you wish to skip this process then do note that you might run into an **error** while seeding the data only **if any shows mentioned in those 2 files were already entered manually by you**.
 
-3.  The seed file doesn't execute all 500 links one after the other, it has been divided in batches of 30 links and after execution of each batch the program has been made to sleep for 30 seconds to avoid 'Are you a robot' check from the browser. **So, the total time to execute all 500 shows will be ~50 mins.**
+3. The process of fetching a link, extracting the data and persisting to it to the database takes around ~5 secs. Calculating this time for all 500 shows would take around ~2500 secs (~42 mins).
 
-4.  This process might heat up your system or even hang if you have other heavy programs running depending on your system specifications.
+4. The `seeds.rb` file doesn't execute all links one after the other. It has been divided into batches where each batch consists of 30 links. After executing each batch, the execution pauses for 30 seconds to avoid 'Are you a robot' check from the browser. So, the total time to execute all 500 shows will be ~50 mins.
 
-5.  If you don't want to initialize all 250 shows from each file then I have provided a constant `N` in `seeds.rb` file which you can change to however many shows you want to populate in your database. **By default, the value of `N` is set to `60` which means total shows executed will be 120, 60 from each file, which would take around 10 mins to execute.**
+5. If you don't want to initialize all 250 shows from each file then I have provided a constant named `N` in `seeds.rb` file which you can change to however many shows you want to populate in your database. **By default, I have set its value to `60` which means total shows executed will be 120, 60 from each file, which would take around 10 mins to execute.**
 
 ---
