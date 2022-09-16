@@ -22,8 +22,13 @@
             if @browser.span(text: "Runtime").present? &&
                 attrb = set_attr("title-techspec_runtime")
                 html = extract_data(:li, attrb, :text)
-                h, m = html.scan(/\d+/).map(&:to_i)
-                [h, m].compact.length == 1 ? h : (h*60) + m
+                hrs, mins = %w(hours minutes).map do | time |
+                    t = html.scan(/(\d+) #{time}/).flatten.first
+                    t.to_i unless t.nil?
+                end
+
+                hrs *= 60 unless hrs.nil?
+                [hrs, mins].compact.reduce(:+)
             end
         end
 
