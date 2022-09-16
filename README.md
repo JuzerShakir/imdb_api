@@ -2,6 +2,8 @@
 
 A Rails API extracting a Movie or Tv-Series data from the IMDb website via a link provided by the user which is then persisted to the database.
 
+**This project was built on Rails version _7.0.4_ on top of Ruby version _3.1.2_.**
+
 <div align="center">
   <img src="public/assets/project_logo.png" />
 </div>
@@ -23,21 +25,6 @@ A Rails API extracting a Movie or Tv-Series data from the IMDb website via a lin
 - [x] Existing data can also be updated via `update` action.
 - [x] Users can also instantly instantiate data to the database via `seeds.rb` file.
 - [ ] Provide business logic.
-
----
-
-## 💎 Required Gems
-
-**This project was built on Ruby version _3.1.2_.**
-
-Following gems were required to accomplish the tasks of the project:
-
-| **Gem Names** | **Version** |
-| :-----------: | :---------: |
-|     Rails     |  **7.0.4**  |
-|  Postgresql   |  **1.2.3**  |
-|     Watir     |  **7.1.0**  |
-|    Sideqik    |  **6.5.6**  |
 
 ---
 
