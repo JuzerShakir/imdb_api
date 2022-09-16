@@ -13,8 +13,20 @@ module Api
             end
         end
 
+        def show
+            @identifier = params_permit_identifier[:identifier]
+
+            if show_exists?
+                @show = Entertainment.find_by(identifier: @identifier)
+                render json: @show, status: :ok
+            else
+                error_message = { error: "Show doesn't exist with this id!" }
+                render json: error_message, status: :unprocessable_entity
+            end
+        end
+
         def update
-            @identifier = update_show_params[:identifier]
+            @identifier = params_permit_identifier[:identifier]
 
             if show_exists?
                 UpdateShowJob.perform_later(@identifier)
