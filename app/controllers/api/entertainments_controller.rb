@@ -1,7 +1,9 @@
 module Api
     class EntertainmentsController < ApplicationController
+        before_action :permit_identifier, except: :create
+
         def create
-            @url = create_show_params[:url]
+            @url = params_permit_url[:url]
 
             if invalid_url?
                 render json: { error: "Invalid URL" }, status: :unprocessable_entity
@@ -14,35 +16,38 @@ module Api
         end
 
         def show
-            @identifier = params_permit_identifier[:identifier]
-
             if show_exists?
                 @show = Entertainment.find_by(identifier: @identifier)
                 render json: @show, status: :ok
             else
-                error_message = { error: "Show doesn't exist with this id!" }
-                render json: error_message, status: :unprocessable_entity
+                render_error_of_no_id_exists
             end
         end
 
         def update
-            @identifier = params_permit_identifier[:identifier]
-
             if show_exists?
                 UpdateShowJob.perform_later(@identifier)
-                render json: "Features are updating.", status: :ok
+                render json: "Features are updating", status: :ok
             else
-                error_message = { error: "Show doesn't exist with this id!" }
-                render json: error_message, status: :unprocessable_entity
+                render_error_of_no_id_exists
             end
         end
 
         private
-            def update_show_params
+            def render_error_of_no_id_exists
+                error_message = { error: "No show exists with this ID" }
+                render json: error_message, status: :unprocessable_entity
+            end
+
+            def params_permit_identifier
                 params.require(:entertainment).permit(:identifier)
             end
 
-            def create_show_params
+            def permit_identifier
+                @identifier = params_permit_identifier[:identifier]
+            end
+
+            def params_permit_url
                 params.require(:entertainment).permit(:url)
             end
 
