@@ -117,7 +117,7 @@ After setting up all this, you're ready to use this webapp.
 
 ---
 
-## Feed Data
+## Feeding Data
 
 ### Manually
 
@@ -128,19 +128,25 @@ rails server
 sidekiq
 ```
 
-Create a POST request that will create a new instance in Entertainment table and others with HABTM relationship:
+To perform a POST request that will create a new instance in Entertainment table and others with HABTM relationship:
 
 ```bash
 curl --request POST --header "Content-Type: application/json" --data '{"url": "https://www.imdb.com/title/tt0944947/"}' http://localhost:3000/api/entertainment -v
 ```
 
-Update an existing entry of Movie or Tv-Series instance with:
+To perform a PATCH request to update an existing entry of Movie or Tv-Series instance with:
 
 ```bash
-curl --request PATCH --header "Content-Type: application/json" --data '{"identifier": "tt0306414"}' http://localhost:3000/api/entertainment -v
+curl --request PATCH --header "Content-Type: application/json" --data '{"identifier": "tt0944947"}' http://localhost:3000/api/entertainment -v
 ```
 
-Which updates following attributes: `ratings`, `popularity`, `budget`, `revenue`
+Which will update the following attributes: `ratings`, `popularity`, `budget`, `revenue`
+
+To perform a GET request to access the contents of a Movie or Tv-Series with an id:
+
+```bash
+curl --request GET --header "Content-Type: application/json" --data '{"identifier":"tt0944947"}' http://localhost:3000/api/entertainment
+```
 
 ---
 
