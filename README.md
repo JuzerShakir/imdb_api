@@ -28,21 +28,25 @@ A Rails API extracting a Movie or Tv-Series data from the IMDb website via a lin
 
 ---
 
-## Entertainments Table Schema
+## Schema
 
-|  **Attribute**   |                                       **Desc**                                        | **Type** |
-| :--------------: | :-----------------------------------------------------------------------------------: | :------: |
-|    **title**     |                            Title of the movie or TV-Series                            |  string  |
-|    **rating**    |                            Ratings of the respective show                             |  float   |
-|   **tagline**    |                             A short overview of the show                              |  string  |
-| **release_date** |                               Release date of the show                                | datetime |
-|  **popularity**  |                     Number of IMDb users who have rated the show                      |  string  |
-|     **type**     |      An STI attribute, a show can either be an instance of a `Movie` or `TvShow`      |  string  |
-|  **identifier**  | An unique IMDb id that starts with `tt` followed by exactly 7 digits found in the URL |  string  |
-|   **runtime**    |                               Total runtime of a show.                                | integer  |
-|   **revenue**    |                               Total revenue of the show                               |  string  |
-|    **budget**    |                               Total budget of the show                                |  string  |
-|     **url**      |                                    URL of the show                                    |  string  |
+<div align="center">
+  <img src="public/assets/schema.png" />
+</div>
+
+|  **Attribute**   |                                       **Desc**                                        |
+| :--------------: | :-----------------------------------------------------------------------------------: |
+|    **title**     |                            Title of the movie or TV-Series                            |
+|    **rating**    |                            Ratings of the respective show                             |
+|   **tagline**    |                             A short overview of the show                              |
+| **release_date** |                               Release date of the show                                |
+|  **popularity**  |                     Number of IMDb users who have rated the show                      |
+|     **type**     |      An STI attribute, a show can either be an instance of a `Movie` or `TvShow`      |
+|  **identifier**  | An unique IMDb id that starts with `tt` followed by exactly 7 digits found in the URL |
+|   **runtime**    |                               Total runtime of a show.                                |
+|   **revenue**    |                               Total revenue of the show                               |
+|    **budget**    |                               Total budget of the show                                |
+|     **url**      |                                    URL of the show                                    |
 
 ```
 has_and_belongs_to_many :genres
@@ -50,8 +54,6 @@ has_and_belongs_to_many :stars
 has_and_belongs_to_many :producers
 has_and_belongs_to_many :directors
 ```
-
-`Genre`, `Star`, `Producer` & `Director` tables each have a single attribute called `name`.
 
 ---
 
