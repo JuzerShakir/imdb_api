@@ -60,13 +60,13 @@
            attrb = set_attr("plot-xl")
            # @browser.window.maximize
            html = extract_data(:span, attrb, :html)
-           html.scan(/>([a-z0-9 ,.'ä:$-]+)/i).flatten.pop
+           html.scan(/>([\S ]+)</).flatten.first
         end
 
         # * 9 total users rated
         def get_popularity
             attrb = { css: ".sc-7ab21ed2-3.dPVcnq" }
             html = extract_data(:div, attrb, :html)
-            html.scan(/>([0-9.M|K]+)/).flatten.pop
+            html.scan(/>([0-9.M|K]+)/).flatten.first
         end
     end
