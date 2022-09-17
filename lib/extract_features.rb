@@ -48,7 +48,8 @@
         def get_revenue
             if @browser.span(text: "Gross worldwide").present?
                 attrb = set_attr("title-boxoffice-cumulativeworldwidegross")
-                extract_data(:li, attrb, :li, :text, :split, :first)
+                str = extract_data(:li, attrb, :li, :text, :split, :first)
+                str.tr('$,', '').to_i
             end
         end
 
@@ -56,7 +57,8 @@
         def get_budget
             if @browser.span(text: "Budget").present?
                 attrb = set_attr("title-boxoffice-budget")
-                extract_data(:li, attrb, :li, :text, :split, :first)
+                str = extract_data(:li, attrb, :li, :text, :split, :first)
+                str.tr('$,', '').to_i
             end
         end
 
