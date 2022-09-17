@@ -8,8 +8,8 @@ module ExtractRelationalFeatures
     # * 2 stars
     def get_stars
         attrb = set_attr("title-cast-item__actor")
-        html = extract_data(:as, attrb, :map)
-        html.each(&:text)
+        html = extract_data(:as, attrb)
+        html.map(&:text).first(5)
     end
     # * 3 production companies
     def get_producers
