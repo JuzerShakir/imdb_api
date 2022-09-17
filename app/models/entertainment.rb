@@ -15,13 +15,15 @@ class Entertainment < ApplicationRecord
         with_models = %w(Genre Star Producer Director)
 
         relational_data.each_with_index { | relation, i |
-            model = with_models[i]
-            associated = self.instance_eval("#{model.downcase}s")
+            unless relation.nil?
+                model = with_models[i]
+                associated = self.instance_eval("#{model.downcase}s")
 
-            relation.each { |record|
-                instance = model.constantize.find_by(name: record)
-                instance.nil? ? associated.create(name: record) : associated << instance
-            }
+                relation.each { |record|
+                    instance = model.constantize.find_by(name: record)
+                    instance.nil? ? associated.create(name: record) : associated << instance
+                }
+            end
         }
     end
 end

@@ -15,14 +15,16 @@ module GetRelationalFeatures
     end
     # * 3 production companies
     def get_producers
-        attrb = set_attr("title-details-companies")
-        html = extract_data(:li, attrb, :div, :ul)
-        html.map(&:text)
+        if @browser.span(text: "Production companies").present?
+            attrb = set_attr("title-details-companies")
+            html = extract_data(:li, attrb, :div, :ul)
+            html.map(&:text)
+        end
     end
     # * 4 director name
     def get_directors
         attrb = set_attr("title-pc-principal-credit")
         html = extract_data(:li, attrb, :html)
-        html.scan(/([a-z .]+)<\/a>/i).flatten
+        html.scan(/([\S ]+)<\/a>/).flatten
     end
 end
