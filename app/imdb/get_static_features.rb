@@ -9,7 +9,7 @@
 
         # * 2 Unique IMDb Id
         def get_identifier
-            @url.match(/(tt\d{7})/)[0]
+            @url.match(/(tt\d{7,8})/)[0]
         end
 
         # * 3 runtime in minutes

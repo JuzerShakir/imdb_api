@@ -7,7 +7,7 @@
 
         # * Extract portion of URL which is important
         def trim_url url
-            url.match(/(\Ahttps:\/\/www.imdb.com\/title\/tt\d{7})/i)[0]
+            url.match(/(\Ahttps:\/\/www.imdb.com\/title\/tt\d{7,8})/i)[0]
         end
 
         def extract_data(tag, attrb, *methods)
