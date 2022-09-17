@@ -1,4 +1,4 @@
-include ConnectAndValidate, GetStaticFeatures, GetDynamicFeatures, GetRelationalFeatures, SetFeatures
+include SetFeatures
 
 if Entertainment.exists?
     models = %w(Entertainment Genre Star Producer Director)

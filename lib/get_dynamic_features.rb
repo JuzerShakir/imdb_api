@@ -1,4 +1,6 @@
 module GetDynamicFeatures
+    include ConnectAndValidate
+
     # * 1 rating
     def get_ratings
         attrb = set_attr("hero-rating-bar__aggregate-rating__score")

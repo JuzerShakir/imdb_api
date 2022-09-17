@@ -1,4 +1,6 @@
 module GetRelationalFeatures
+    include ConnectAndValidate
+
     # * 1 genres
     def get_genres
         attrb = set_attr("genres")

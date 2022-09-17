@@ -1,4 +1,6 @@
 module SetFeatures
+    include GetStaticFeatures, GetDynamicFeatures, GetRelationalFeatures
+
     def set_attribute_values
         @all_show_attributes = %i(title identifier ratings runtime release_date revenue budget tagline popularity)
 
@@ -17,7 +19,10 @@ module SetFeatures
         set_attribute_values
         @show.update( @all_show_attributes.zip(@all_show_values).to_h )
 
-        set_relational_values if @show.persisted?
-        @show.method("set_relations").call(@relational_data)
+        if @show.persisted?
+            set_relational_values
+            @browser.close
+            @show.method("set_relations").call(@relational_data)
+        end
     end
 end

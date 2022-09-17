@@ -1,4 +1,6 @@
     module GetStaticFeatures
+    include ConnectAndValidate
+
         # * 1 title
         def get_title
             attrb = set_attr("hero-title-block__title")
