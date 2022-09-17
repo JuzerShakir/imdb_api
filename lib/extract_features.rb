@@ -19,7 +19,7 @@
 
         # * 4 runtime in minutes
         def get_runtime
-            if @browser.span(text: "Runtime").present? &&
+            if @browser.span(text: "Runtime").present?
                 attrb = set_attr("title-techspec_runtime")
                 html = extract_data(:li, attrb, :text)
                 hrs, mins = %w(hours minutes).map do | time |
