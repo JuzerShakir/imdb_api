@@ -52,12 +52,12 @@ module Api
             end
 
             def invalid_url?
-                valid_url = /(\Ahttps:\/\/www.imdb.com\/title\/tt\d{7})/i
+                valid_url = /(\Ahttps:\/\/www.imdb.com\/title\/tt\d{7,8})/i
                 !@url.match?(valid_url)
             end
 
             def show_exists?
-                Entertainment.exists?(identifier:  @identifier || @url.match(/(tt\d{7})/)[0] )
+                Entertainment.exists?(identifier:  @identifier || @url.match(/(tt\d{7,8})/)[0] )
             end
     end
 end
