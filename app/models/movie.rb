@@ -4,6 +4,8 @@ class Movie < Entertainment
 
     private
         def set_profit
-            self.profit = self.revenue - self.budget
+            unless self.revenue.nil? || self.budget.nil?
+                self.profit = self.revenue - self.budget
+            end
         end
 end
