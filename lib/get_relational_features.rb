@@ -1,4 +1,4 @@
-module ExtractRelationalFeatures
+module GetRelationalFeatures
     # * 1 genres
     def get_genres
         attrb = set_attr("genres")
