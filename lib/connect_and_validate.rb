@@ -1,5 +1,5 @@
     module ConnectAndValidate
-        def connect_n_fetch(url)
+        def instantiate_browser_with(url)
             @url = trim_url(url)
             @browser = Watir::Browser.new :chrome, headless: true
             @browser.goto @url

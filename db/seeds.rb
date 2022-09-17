@@ -19,7 +19,7 @@ files.each do | file |
 
     groups_of_urls.each_with_index do | group_of_urls, i |
         group_of_urls.each do | url |
-            connect_n_fetch(url)
+            instantiate_browser_with(url)
             set_show_values
             @browser.close
         end
