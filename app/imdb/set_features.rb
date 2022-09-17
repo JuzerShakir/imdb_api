@@ -21,7 +21,6 @@ module SetFeatures
 
         if @show.persisted?
             set_relational_values
-            @browser.close
             @show.method("set_relations").call(@relational_data)
         end
     end
