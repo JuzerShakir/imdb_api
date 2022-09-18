@@ -12,9 +12,8 @@ module GetDynamicFeatures
     def get_revenue
         if @browser.span(text: "Gross worldwide").present?
             attrb = set_attr("title-boxoffice-cumulativeworldwidegross")
-            str = extract_data(:li, attrb, :li, :text, :split, :first)
+            str = extract_data(:li, attrb, :li, :text)
             str.scan(/\d+/).join.to_i
-
         end
     end
 
@@ -22,7 +21,7 @@ module GetDynamicFeatures
     def get_budget
         if @browser.span(text: "Budget").present?
             attrb = set_attr("title-boxoffice-budget")
-            str = extract_data(:li, attrb, :li, :text, :split, :first)
+            str = extract_data(:li, attrb, :li, :text)
             str.scan(/\d+/).join.to_i
         end
     end
