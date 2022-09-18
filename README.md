@@ -74,7 +74,9 @@ has_and_belongs_to_many :directors
 
 ---
 
-## 📋 Execution
+## Running the App
+
+### Setup env for the app
 
 Run the following commands to execute locally:
 
@@ -89,6 +91,8 @@ cd imdb_api
 
 bundle install
 ```
+
+### Setup PostgreSQL
 
 To successfully create development and test database, you will need to update `config.database.yml` file with correct postgresql username and password.
 To edit the it without exposing your credentials, give the following command:
@@ -120,15 +124,19 @@ Create database:
 rails db:create
 ```
 
-### Setting Up Sidekiq
+### Setup Background Jobs
+
+You will also need to install and setup sidekiq and redis to enable background jobs for extracting and saving data from IMDb website to db.
+
+#### Setting Up Sidekiq
 
 [Video Tutorial](https://youtu.be/aaGSh38nzq8)
 
-### Setting Up Redis
+#### Setting Up Redis
 
 [Blog Tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04)
 
-After setting up all this, you're ready to use this webapp.
+You're now ready to use this webapp.
 
 ---
 
@@ -143,13 +151,25 @@ rails server
 sidekiq
 ```
 
-To perform a POST request that will create a new instance in Entertainment table and others with HABTM relationship:
+#### POST request
+
+Performing a POST request by entering the correct URL of a Movie or TV-Series from IMDb website:
 
 ```bash
 curl --request POST --header "Content-Type: application/json" --data '{"url": "https://www.imdb.com/title/tt0944947/"}' http://localhost:3000/api/entertainment -v
 ```
 
-To perform a PATCH request to update an existing entry of Movie or Tv-Series instance with:
+#### GET request
+
+Performing a GET request with a valid IMDb ID to return a JSON object of a Movie or Tv-Series:
+
+```bash
+curl --request GET --header "Content-Type: application/json" --data '{"identifier":"tt0944947"}' http://localhost:3000/api/entertainment
+```
+
+#### PATCH request
+
+Performing a PATCH request to update an existing entry:
 
 ```bash
 curl --request PATCH --header "Content-Type: application/json" --data '{"identifier": "tt0944947"}' http://localhost:3000/api/entertainment -v
@@ -157,17 +177,14 @@ curl --request PATCH --header "Content-Type: application/json" --data '{"identif
 
 Which will update the following attributes: `ratings`, `popularity`, `budget`, `revenue`
 
-To perform a GET request to access the contents of a Movie or Tv-Series with an id:
-
-```bash
-curl --request GET --header "Content-Type: application/json" --data '{"identifier":"tt0944947"}' http://localhost:3000/api/entertainment
-```
+> > **NOTE**:
+> > An IMDb ID can be found in the link of the URL which is followed by the 'title' text in the link, for example: _`https://www.imdb.com/title/tt5052448`_, here **tt5052448** is a Unique IMDb ID for that Movie or TV-Series which I call an `identifier` in my project.
 
 ---
 
-### Via Seed
+## Via Seed
 
-The links are provided in the `lib/seed_data` folder which contains 2 files, `movie_links.txt` & `tv-series_links.txt`, where each file contains links of Top 250 [Movies](https://www.imdb.com/chart/top/?ref_=nv_mv_250) and [TV-Series](https://www.imdb.com/chart/toptv/?ref_=nv_tvv_250) according to IMDb ratings.
+The `lib/seed_data` folder contains 2 files, `movie_links.txt` & `tv-series_links.txt`, where each file contains links of Top 250 [Movies](https://www.imdb.com/chart/top/?ref_=nv_mv_250) and [TV-Series](https://www.imdb.com/chart/toptv/?ref_=nv_tvv_250) according to IMDb ratings respectively.
 
 You can feed the database with 500 shows with a single `rails db:seed` command.
 
