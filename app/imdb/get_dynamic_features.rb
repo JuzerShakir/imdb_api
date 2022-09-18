@@ -45,7 +45,7 @@ module GetDynamicFeatures
             end
             hrs *= 60 unless hrs.nil?
             total_time = [hrs, mins].compact.reduce(:+)
-            @show.type = "TvShow" ? check_runtime_validity(total_time) : total_time
+            @show.type == "TvShow" ? check_runtime_validity(total_time) : total_time
         end
     end
 
