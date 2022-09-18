@@ -1,18 +1,32 @@
-# Project: IMDb API
+# IMDb API
 
-A Rails API extracting a Movie or Tv-Series data from the IMDb website via a link provided by the user which is then persisted to the database.
+> A Rails API for extracting data of a Movie or Tv-Series via an IMDb link provided by the user.
 
-**This project was built on Rails version _7.0.4_ on top of Ruby version _3.1.2_.**
+---
+
+<div align="center">
+
+  <img src="https://img.shields.io/badge/Ruby_3.1.2-CC342D?style=for-the-badge&logo=ruby&logoColor=white">
+
+  <img src="https://img.shields.io/badge/Rails_7.0.4-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white">
+
+  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white">
+
+  <img src="https://img.shields.io/badge/redis-%23DD0031.svg?&style=for-the-badge&logo=redis&logoColor=white">
+</div>
 
 <div align="center">
   <img src="public/assets/project_logo.png" />
 </div>
 
-![](https://visitor-badge-reloaded.herokuapp.com/badge?page_id=juzershakir.imdb_api&color=000000&lcolor=000000&style=for-the-badge&logo=Github)
+<div align="center">
+  <img src="https://visitor-badge-reloaded.herokuapp.com/badge?page_id=juzershakir.imdb_api&color=000000&lcolor=000000&style=for-the-badge&logo=Github">
 
-<a href="https://wakatime.com/badge/user/ccef187f-4308-4666-920d-d0a9a07d713a/project/509003f7-2b71-4958-be09-1a0d27b03a0c"><img src="https://wakatime.com/badge/user/ccef187f-4308-4666-920d-d0a9a07d713a/project/509003f7-2b71-4958-be09-1a0d27b03a0c.svg" alt="wakatime"></a>
+</div>
 
-## ❗ Overview
+---
+
+## Summary
 
 - [x] Using PostgreSQL database to store the data.
 - [x] Using the `Watir` & `Webdriver` gem to extract data from IMDb website.
@@ -48,6 +62,7 @@ A Rails API extracting a Movie or Tv-Series data from the IMDb website via a lin
 |   **runtime**    |                               Total runtime of a show.                                |
 |   **revenue**    |                               Total revenue of the show                               |
 |    **budget**    |                               Total budget of the show                                |
+|    **profit**    |                 Calculated based on the values of revenue and budget                  |
 |     **url**      |                                    URL of the show                                    |
 
 ```
