@@ -38,7 +38,7 @@ module GetDynamicFeatures
         if @browser.span(text: "Runtime").present?
             attrb = set_attr("title-techspec_runtime")
             html = extract_data(:li, attrb, :text)
-            hrs, mins = %w(hours minutes).map do | time |
+            hrs, mins = %w(hour minutes).map do | time |
                 t = html.scan(/(\d+) #{time}/).flatten.first
                 t.to_i unless t.nil?
             end
