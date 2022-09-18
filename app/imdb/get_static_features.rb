@@ -12,22 +12,7 @@
             @url.match(/(tt\d{7,8})/)[0]
         end
 
-        # * 3 runtime in minutes
-        def get_runtime
-            if @browser.span(text: "Runtime").present?
-                attrb = set_attr("title-techspec_runtime")
-                html = extract_data(:li, attrb, :text)
-                hrs, mins = %w(hours minutes).map do | time |
-                    t = html.scan(/(\d+) #{time}/).flatten.first
-                    t.to_i unless t.nil?
-                end
-
-                hrs *= 60 unless hrs.nil?
-                [hrs, mins].compact.reduce(:+)
-            end
-        end
-
-        # * 4 release_date
+        # * 3 release_date
         def get_release_date
             if @browser.link(text: "Release date").present?
                 attrb = set_attr("title-details-releasedate")
@@ -39,7 +24,7 @@
             end
         end
 
-        # * 5 tagline
+        # * 4 tagline
         def get_tagline
            attrb = set_attr("plot-xl")
            # @browser.window.maximize

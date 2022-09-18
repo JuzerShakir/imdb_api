@@ -33,4 +33,36 @@ module GetDynamicFeatures
         html = extract_data(:div, attrb, :html)
         html.scan(/>([0-9.M|K]+)/).flatten.first
     end
+
+    # * 5 runtime in minutes
+    def get_runtime
+        if @browser.span(text: "Runtime").present?
+            attrb = set_attr("title-techspec_runtime")
+            html = extract_data(:li, attrb, :text)
+            hrs, mins = %w(hours minutes).map do | time |
+                t = html.scan(/(\d+) #{time}/).flatten.first
+                t.to_i unless t.nil?
+            end
+            hrs *= 60 unless hrs.nil?
+            total_time = [hrs, mins].compact.reduce(:+)
+            @show.type = "TvShow" ? check_runtime_validity(total_time) : total_time
+        end
+    end
+
+    private
+        # * number of episdoes
+        def get_number_of_episodes
+            attrb = set_attr("episodes-header")
+            html = extract_data(:div, attrb, :text)
+            html.match(/\d+/)[0].to_i
+        end
+
+        def check_runtime_validity(time)
+            if time.between?(0,60)
+                time *= get_number_of_episodes
+            else
+                time
+            end
+        end
+
 end
