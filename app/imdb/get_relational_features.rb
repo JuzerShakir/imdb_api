@@ -15,7 +15,7 @@ module GetRelationalFeatures
     end
     # * 3 production companies
     def get_producers
-        if @browser.span(text: "Production companies").present?
+        if @browser.link(text: /Production company|companies/).present?
             attrb = set_attr("title-details-companies")
             html = extract_data(:li, attrb, :div, :ul)
             html.map(&:text)
