@@ -34,10 +34,10 @@
 - [x] Checks if the user input is a valid IMDb URL.
 - [x] After validating URL, the process is passed to ActiveJob.
 - [x] Checks if the content of a URL is a Movie or TV-Series.
-- [x] Checks if the content has support to rate the show.
-- [x] If all checks pass then the data extraction process begins and saves it to the database.
+- [x] Checks if the content can be rated by the users.
+- [x] If all checks pass then the data extraction process begins.
 - [x] Existing data can also be updated via `update` action.
-- [x] Users can also instantly instantiate data to the database via `seeds.rb` file.
+- [x] Users can also instantly instantiate data to the database via `rails db:seed` command.
 - [ ] Provide business logic.
 
 ---
@@ -50,20 +50,20 @@
 
 ### Our Entertainment Model
 
-|  **Attribute**   |                                       **Desc**                                        |
-| :--------------: | :-----------------------------------------------------------------------------------: |
-|    **title**     |                            Title of the movie or TV-Series                            |
-|    **rating**    |                            Ratings of the respective show                             |
-|   **tagline**    |                             A short overview of the show                              |
-| **release_date** |                               Release date of the show                                |
-|  **popularity**  |                     Number of IMDb users who have rated the show                      |
-|     **type**     |      An STI attribute, a show can either be an instance of a `Movie` or `TvShow`      |
-|  **identifier**  | An unique IMDb id that starts with `tt` followed by exactly 7 digits found in the URL |
-|   **runtime**    |                               Total runtime of a show.                                |
-|   **revenue**    |                               Total revenue of the show                               |
-|    **budget**    |                               Total budget of the show                                |
-|    **profit**    |                 Calculated based on the values of revenue and budget                  |
-|     **url**      |                                    URL of the show                                    |
+|  **Attribute**   |                                          **Desc**                                          |
+| :--------------: | :----------------------------------------------------------------------------------------: |
+|    **title**     |                              Title of the movie or TV-Series                               |
+|    **rating**    |                               Ratings of the respective show                               |
+|   **tagline**    |                                A short overview of the show                                |
+| **release_date** |                                  Release date of the show                                  |
+|  **popularity**  |                        Number of IMDb users who have rated the show                        |
+|     **type**     |        An STI attribute, a show can either be an instance of a `Movie` or `TvShow`         |
+|  **identifier**  | An unique IMDb id that starts with `tt` followed by exactly 7 or 8 digits found in the URL |
+|   **runtime**    |                                  Total runtime of a show.                                  |
+|   **revenue**    |                                 Total revenue of the show                                  |
+|    **budget**    |                                  Total budget of the show                                  |
+|    **profit**    |                    Calculated based on the values of revenue and budget                    |
+|     **url**      |                                      URL of the show                                       |
 
 ```
 has_and_belongs_to_many :genres
@@ -186,18 +186,14 @@ Which will update the following attributes: `ratings`, `popularity`, `budget`, `
 
 The `lib/seed_data` folder contains 2 files, `movie_links.txt` & `tv-series_links.txt`, where each file contains links of Top 250 [Movies](https://www.imdb.com/chart/top/?ref_=nv_mv_250) and [TV-Series](https://www.imdb.com/chart/toptv/?ref_=nv_tvv_250) according to IMDb ratings respectively.
 
-You can feed the database with 500 shows with a single `rails db:seed` command.
-
 **Few things to note before running `rails db:seed`**
 
-1. Depending on your system specifications, this process might heat up your system or even hang if you have other heavy programs running simultaneously.
+1. Depending on your system specifications, this process might take lots resources or even hang if you have other heavy programs running simultaneously. It is recommended that all programs should be closed.
 
-2. It will first destroy all the instances from all the tables, if it exists, and then populate the data. If you wish to skip this process then do note that you might run into an **error** while seeding the data only **if any shows mentioned in those 2 files were already entered manually by you**.
+2. The process of fetching a link, extracting the data and persisting to it to the database takes around ~5 secs. Calculating this time for all 500 shows would take around ~2500 secs (~42 mins).
 
-3. The process of fetching a link, extracting the data and persisting to it to the database takes around ~5 secs. Calculating this time for all 500 shows would take around ~2500 secs (~42 mins).
+3. The `seeds.rb` file doesn't execute all links one after the other. It has been divided into batches where each batch consists of 30 links. After executing each batch, the execution pauses for 30 seconds to avoid 'Are you a robot' check from the browser. So, the total time to execute all 500 shows will be ~50 mins.
 
-4. The `seeds.rb` file doesn't execute all links one after the other. It has been divided into batches where each batch consists of 30 links. After executing each batch, the execution pauses for 30 seconds to avoid 'Are you a robot' check from the browser. So, the total time to execute all 500 shows will be ~50 mins.
-
-5. If you don't want to initialize all 250 shows from each file then I have provided a constant named `N` in `seeds.rb` file which you can change to however many shows you want to populate in your database. **By default, I have set its value to `60` which means total shows executed will be 120, 60 from each file, which would take around 10 mins to execute.**
+4. If you don't want to initialize all 250 shows from each file then I have provided a constant named `N` in `seeds.rb` file which you can change to however many shows you want to populate in your database. **By default, I have set its value to `60` which means total shows executed will be 120, 60 from each file, which would take around 10 mins to execute.**
 
 ---
