@@ -24,7 +24,7 @@ module GetRelationalFeatures
     # * 4 director name
     def get_directors
         attrb = set_attr("title-pc-principal-credit")
-        html = extract_data(:li, attrb, :html)
-        html.scan(/([\S ]+)<\/a>/).flatten
+        html = extract_data(:li, attrb, :links).map(&:html)
+        html.map { | link | link.scan(/>([\S ]+)<\/a>/) }.flatten
     end
 end
