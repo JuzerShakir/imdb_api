@@ -1,13 +1,12 @@
 include SetFeatures
 
-if Entertainment.exists?
-    models = %w(Entertainment Genre Star Producer Director)
-    models.each { |model| model.constantize.destroy_all }
-end
+# if Entertainment.exists?
+#     models = %w(Entertainment Genre Star Producer Director)
+#     models.each { |model| model.constantize.destroy_all }
+# end
 
 N = 60                  # * Values acceptable between 1 to 250
 URLS_IN_A_GROUP = 30      # ! Do NOT set value greater than 30 to avoid robot confiramtion
-
 files = %w(movie_links.txt tv-series_links.txt)
 
 files.each do | file |
