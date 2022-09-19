@@ -5,7 +5,7 @@ module GetRelationalFeatures
     def get_genres
         attrb = set_attr("genres")
         html = extract_data(:div, attrb, :text)
-        html.gsub("\n", ' ').split
+        html.split("\n")
     end
     # * 2 stars
     def get_stars
