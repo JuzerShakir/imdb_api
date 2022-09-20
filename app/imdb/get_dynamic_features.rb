@@ -30,7 +30,14 @@ module GetDynamicFeatures
     def get_popularity
         attrb = { css: ".sc-7ab21ed2-3.dPVcnq" }
         html = extract_data(:div, attrb, :html)
-        html.scan(/>([0-9.M|K]+)/).flatten.first
+        num = html.scan(/>([0-9.M|K]+)/).flatten.first
+        if num.gsub!('K', '')
+            num.to_f * 1000
+        elsif num.gsub!('M', '')
+            num.to_f * 1000000
+        else
+            num.to_f
+        end
     end
 
     # * 5 runtime in minutes
