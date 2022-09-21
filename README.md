@@ -38,7 +38,7 @@
 - [x] If all checks pass then the data extraction process begins.
 - [x] Existing data can also be updated via `update` action.
 - [x] Users can also instantly instantiate data to the database via `rails db:seed` command.
-- [ ] Provide business logic.
+- [x] Provide business logic.
 
 ---
 
@@ -140,7 +140,7 @@ You're now ready to use this webapp.
 
 ---
 
-## Feeding Data
+## Feeding the Data
 
 ### Manually
 
@@ -197,3 +197,173 @@ The `lib/seed_data` folder contains 2 files, `movie_links.txt` & `tv-series_link
 4. I have provided a constant named `N` in `seeds.rb` file which you can change to however many shows you want to populate in your database. **By default, I have set its value to `125` which means total shows executed will be 250, 125 from each file, which would take around ~33 mins to execute.**
 
 ---
+
+## Business Logic
+
+I have provided some class methods that I think will be useful to us to get useful insights of the data or perform further operations with the result returned.
+
+After seeding the data, here are some of the results returned by the logics provided in the model:
+
+### Entertainment Model
+
+_Will work in `Movie` & `TvShow` models_
+
+1. **`Entertainment.highest_ratings(5)`**
+
+```ruby
+[#<TvShow:0x00007f4ad7977600
+  id: 251,
+  title: "Planet Earth II",
+  ratings: 9.5,
+  ..
+  profit: nil>,
+ #<TvShow:0x00007f4ad78f3e40
+  id: 252,
+  title: "Breaking Bad",
+  ratings: 9.5,
+  ...
+  profit: nil>
+]
+```
+
+2. **`Entertainment.ratings_between(9, 10)`**
+
+```ruby
+[#<Movie:0x00007fe3f5b9f628
+  id: 3,
+  title: "The Dark Knight",
+  ratings: 9.0,
+  ...
+  profit: 821182769>,
+ #<Movie:0x00007fe3f5b9f2e0
+  id: 4,
+  title: "The Godfather: Part II",
+  ratings: 9.0,
+  ...
+  profit: 34961919>]
+```
+
+3. **`Entertainment.released_in_year(2022)`**
+
+```ruby
+#<TvShow:0x00007fe3f5bb1558
+  id: 498,
+  title:"RocketBoys",
+  ratings: 8.9,
+  ...
+  profit: nil>,
+ #<Movie:0x00007fe3f5bb1288
+  id: 504,
+  title: "A Thursday",
+  ratings: 7.7,
+  ...
+  profit: nil>
+]
+```
+
+### Movie Model
+
+1. **`Movie.weekend_release_with_highest_rating.first`**
+
+```ruby
+ =>
+#<Movie:0x00007f1fd47aacd8
+ id: 28,
+ title: "Star Wars",
+ ratings: 8.6,
+ tagline:
+  "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
+ release_date: Sun, 29 Jan 1978 00:00:00.000000000 UTC +00:00,
+ popularity: 1300000,
+ type: "Movie",
+ identifier: "tt0076759",
+ runtime: 120,
+ revenue: 775398007,
+ budget: 11000000,
+ url: "https://www.imdb.com/title/tt0076759",
+ created_at: Tue, 20 Sep 2022 14:28:54.828374000 UTC +00:00,
+ updated_at: Tue, 20 Sep 2022 14:28:54.828374000 UTC +00:00,
+ profit: 764398007>
+```
+
+2. **`Movie.weekend_release_with_highest_profit.first`**
+
+```ruby
+#<Movie:0x00007f67ba826af8
+ id: 28,
+ title: "Star Wars",
+ ratings: 8.6,
+ tagline:
+  "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
+ release_date: Sun, 29 Jan 1978 00:00:00.000000000 UTC +00:00,
+ popularity: 1300000,
+ type: "Movie",
+ identifier: "tt0076759",
+ runtime: 120,
+ revenue: 775398007,
+ budget: 11000000,
+ url: "https://www.imdb.com/title/tt0076759",
+ created_at: Tue, 20 Sep 2022 14:28:54.828374000 UTC +00:00,
+ updated_at: Tue, 20 Sep 2022 14:28:54.828374000 UTC +00:00,
+ profit: 764398007>
+```
+
+### Producer Model
+
+1. **`Producer.produced_more_than(20)`**
+
+```ruby
+[<Producer:0x00007f2e4b9b7a28
+  id: 5, name: "Warner Bros.">,
+  <Producer:0x00007f2e4b99c818
+  id: 358, name: "British Broadcasting Corporation (BBC)">]
+```
+
+### Director Model
+
+1. **`Director.directed_more_than(7)`**
+
+```ruby
+[<Director:0x00007f2e500b38a0 id: 3, name: "Christopher Nolan">,
+ <Director:0x00007f2e500bfd08 id: 97, name: "Clint Eastwood">,
+ <Director:0x00007f2e500bfbf0 id: 179, name: "David Attenborough">,
+ <Director:0x00007f2e500bfa88 id: 5, name: "Steven Spielberg">]
+```
+
+### Genre Model
+
+1. **`Genre.appeared_more_than(100)`**
+
+```ruby
+[<Genre:0x00007f2e51fca6d0 id: 1, name: "Drama">,
+ <Genre:0x00007f2e51f21b70 id: 15, name: "Comedy">,
+ <Genre:0x00007f2e51f21aa8 id: 3, name: "Action">,
+ <Genre:0x00007f2e51f219e0 id: 6, name: "Adventure">,
+ <Genre:0x00007f2e51f218c8 id: 2, name: "Crime">,
+ <Genre:0x00007f2e51f21198 id: 4, name: "Biography">]
+```
+
+### Star Model
+
+1. **`Star.acted_in_more_than(9)`**
+
+```ruby
+[<Star:0x00007fe2d843c340 id: 16, name: "Robert De Niro">,
+ <Star:0x00007fe2d8448d20 id: 46, name: "Tom Hanks">]
+```
+
+#### Shared Scope
+
+And all of these models, `Director, Producer, Genre & Stars` have the following method:
+
+1. **`Star.with_most_profit(1)`**
+
+```ruby
+[<Star:0x00007fe2d909ffd8 id: nil, name: "Mark Ruffalo">]
+```
+
+2. **`Director.with_most_profit(1)`**
+
+```ruby
+[<Director:0x00007fe2da5cdd38 id: nil, name: "Anthony Russo">]
+```
