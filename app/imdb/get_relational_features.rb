@@ -25,6 +25,7 @@ module GetRelationalFeatures
     def get_directors
         attrb = set_attr("title-pc-principal-credit")
         html = extract_data(:li, attrb, :links).map(&:html)
-        html.map { | link | link.scan(/>([\S ]+)<\/a>/) }.flatten
+        valid_links = html.keep_if { | link | link.include?("ipc-metadata-list-item__list-content-item") }
+        valid_links.map { | link | link.scan(/>([\S ]+)<\/a>/) }.flatten
     end
 end
