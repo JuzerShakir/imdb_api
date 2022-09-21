@@ -22,9 +22,9 @@ class Movie < Entertainment
     scope :weekend_release, -> { presence_of_release_date.where.not('extract(DOW from release_date) BETWEEN 1 AND 5') }
 
     # chaining
-    scope :weekend_release_with_highest_rating, -> { weekend_release.highest_ratings }.order(ratings: :desc)
-    scope :weekend_release_with_highest_profit, -> { weekend_release.highest_profit }.order(profit: :desc)
-    scope :released_on_fridays, -> { presence_of_release_date.released_in_day(5) }.order(release_date: :asc)
+    scope :weekend_release_with_highest_rating, -> { weekend_release.highest_rating.order(ratings: :desc) }
+    scope :weekend_release_with_highest_profit, -> { weekend_release.highest_profit.order(profit: :desc) }
+    scope :released_on_fridays, -> { presence_of_release_date.released_in_day(5).order(release_date: :asc) }
 
     private
         def set_profit
