@@ -26,6 +26,33 @@
 
 ---
 
+## Table of Contents
+
+- [Summary](#summary)
+- [Schema](#schema)
+  - [Our Entertainment Model](#our-entertainment-model)
+- [Running the App](#running-the-app)
+  - [Setup env for the app](#setup-env-for-the-app)
+  - [Setup PostgreSQL](#setup-postgresql)
+  - [Setup Background Jobs](#setup-background-jobs)
+    - [Setting Up Sidekiq](#setting-up-sidekiq)
+    - [Setting Up Redis](#setting-up-redis)
+- [Feeding the Data](#feeding-the-data)
+  - [Manually](#manually)
+    - [POST request](#post-request)
+    - [GET request](#get-request)
+    - [PATCH request](#patch-request)
+  - [Via Seed](#via-seed)
+- [Business Logic](#business-logic)
+  - [Entertainment Model](#entertainment-model)
+  - [Producer Model](#producer-model)
+  - [Director Model](#director-model)
+  - [Genre Model](#genre-model)
+  - [Star Model](#star-model)
+    - [Shared Scopes](#shared-scope)
+
+---
+
 ## Summary
 
 - [x] Using PostgreSQL database to store the data.
