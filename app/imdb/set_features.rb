@@ -8,8 +8,21 @@ module SetFeatures
             get_budget, get_tagline, get_popularity]
     end
 
-    def set_relational_values
-        @relational_data = [get_genres, get_stars, get_producers, get_directors]
+    def set_relations
+        with_models = %w(Genre Star Producer Director)
+        relational_data = [get_genres, get_stars, get_producers, get_directors]
+
+        relational_data.each_with_index { | relation, i |
+            unless relation.nil?
+                model = with_models[i]
+                associated = @show.instance_eval("#{model.downcase}s")
+
+                relation.each { |record|
+                    instance = model.constantize.find_by(name: record)
+                    instance.nil? ? associated.create(name: record) : associated << instance
+                }
+            end
+        }
     end
 
     def set_show_values
@@ -19,9 +32,6 @@ module SetFeatures
         set_attribute_values
         @show.update( @all_show_attributes.zip(@all_show_values).to_h )
 
-        if @show.persisted?
-            set_relational_values
-            @show.method("set_relations").call(@relational_data)
-        end
+        set_relations if @show.persisted?
     end
 end
