@@ -32,8 +32,8 @@ class Entertainment < ApplicationRecord
     scope :released_in_days_between, -> (from, to) { where('extract(DOW from release_date) BETWEEN ? AND ?', from, to).order(release_date: :asc) }
 
     # RUNTIME
-    scope :longest, -> (n=10) { order(runtime: :desc, title: :asc).limit(n) }
-    scope :shortest, -> (n=10) { order(runtime: :asc, title: :asc).limit(n) }
+    scope :longest_runtime, -> (n=10) { order(runtime: :desc, title: :asc).limit(n) }
+    scope :shortest_runtime, -> (n=10) { order(runtime: :asc, title: :asc).limit(n) }
     scope :runtime_between, -> (from, to) { where(runtime: from..to).order(runtime: :asc) }
 
     # POPULARITY
