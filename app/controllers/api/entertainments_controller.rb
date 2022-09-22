@@ -33,6 +33,15 @@ module Api
             end
         end
 
+        def destroy
+            if show_exists?
+                Entertainment.find_by(identifier: @identifier).destroy
+                head :no_content
+            else
+                render_error_of_no_id_exists
+            end
+        end
+
         private
             def render_error_of_no_id_exists
                 error_message = { error: "No show exists with this ID" }
