@@ -188,7 +188,7 @@ curl --request POST --header "Content-Type: application/json" --data '{"url": "h
 
 #### GET request
 
-Performing a GET request with a valid IMDb ID to return a JSON object of a Movie or Tv-Series:
+Performing a GET request with a valid IMDb ID which returns a JSON object of a Movie or Tv-Series:
 
 ```bash
 curl --request GET --header "Content-Type: application/json" --data '{"identifier":"tt0944947"}' http://localhost:3000/api/entertainment
@@ -203,6 +203,14 @@ curl --request PATCH --header "Content-Type: application/json" --data '{"identif
 ```
 
 Which will update the following attributes: `ratings`, `popularity`, `budget`, `revenue`
+
+#### DELETE request
+
+Performing a DELETE request to delete an existing entry:
+
+```bash
+curl --request DELETE --header "Content-Type: application/json" --data '{"identifier": "tt0944947"}' http://localhost:3000/api/entertainment -v
+```
 
 > > **NOTE**:
 > > An IMDb ID can be found in the link of the URL which is followed by the 'title' text in the link, for example: _`https://www.imdb.com/title/tt5052448`_, here **tt5052448** is a Unique IMDb ID for that Movie or TV-Series which I call an `identifier` in my project.
