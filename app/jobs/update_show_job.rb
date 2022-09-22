@@ -3,9 +3,9 @@ class UpdateShowJob < ApplicationJob
 
     queue_as :default
 
-    def perform(identifier)
-        @show = Entertainment.find_by(identifier: identifier)
-        instantiate_browser_with("https://www.imdb.com/title/#{identifier}")
+    def perform(show)
+        @show = show
+        instantiate_browser_with(@show.url)
         update_show_values
         @browser.close
     end
