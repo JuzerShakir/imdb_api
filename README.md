@@ -243,7 +243,7 @@ After seeding the data, here are some of the results returned by the logics prov
 
 _Will work in `Movie` & `TvShow` models_
 
-1. **`Entertainment.highest_rated(5)`**
+1. **`Entertainment.highest_rated 5`**
 
 ```ruby
 [#<TvShow:0x00007f4ad7977600
@@ -261,7 +261,7 @@ _Will work in `Movie` & `TvShow` models_
 ]
 ```
 
-2. **`Entertainment.ratings_between(9, 10)`**
+2. **`Entertainment.ratings_between 9, 10`**
 
 ```ruby
 [#<Movie:0x00007fe3f5b9f628
@@ -278,7 +278,7 @@ _Will work in `Movie` & `TvShow` models_
   profit: 34961919>]
 ```
 
-3. **`Entertainment.released_in_year(2022)`**
+3. **`Entertainment.released_in_year 2022`**
 
 ```ruby
 #<TvShow:0x00007fe3f5bb1558
@@ -345,7 +345,7 @@ _Will work in `Movie` & `TvShow` models_
 
 ### Producer Model
 
-1. **`Producer.produced_more_than(20)`**
+1. **`Producer.produced_more_than 20`**
 
 ```ruby
 [<Producer:0x00007f2e4b9b7a28
@@ -356,7 +356,7 @@ _Will work in `Movie` & `TvShow` models_
 
 ### Director Model
 
-1. **`Director.directed_more_than(7)`**
+1. **`Director.directed_more_than 7`**
 
 ```ruby
 [<Director:0x00007f2e500b38a0 id: 3, name: "Christopher Nolan">,
@@ -367,7 +367,7 @@ _Will work in `Movie` & `TvShow` models_
 
 ### Genre Model
 
-1. **`Genre.appeared_more_than(100)`**
+1. **`Genre.appeared_more_than 100`**
 
 ```ruby
 [<Genre:0x00007f2e51fca6d0 id: 1, name: "Drama">,
@@ -380,7 +380,7 @@ _Will work in `Movie` & `TvShow` models_
 
 ### Star Model
 
-1. **`Star.acted_in_more_than(9)`**
+1. **`Star.acted_in_more_than 9`**
 
 ```ruby
 [<Star:0x00007fe2d843c340 id: 16, name: "Robert De Niro">,
@@ -391,13 +391,13 @@ _Will work in `Movie` & `TvShow` models_
 
 And all of these models, `Director, Producer, Genre & Stars` have the following method:
 
-1. **`Star.with_most_profit(1)`**
+1. **`Star.with_most_profit 1`**
 
 ```ruby
 [<Star:0x00007fe2d909ffd8 id: nil, name: "Mark Ruffalo">]
 ```
 
-2. **`Director.with_most_profit(1)`**
+2. **`Director.with_most_profit 1`**
 
 ```ruby
 [<Director:0x00007fe2da5cdd38 id: nil, name: "Anthony Russo">]
