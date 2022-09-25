@@ -243,7 +243,7 @@ After seeding the data, here are some of the results returned by the logics prov
 
 _Will work in `Movie` & `TvShow` models_
 
-1. **`Entertainment.highest_ratings(5)`**
+1. **`Entertainment.highest_rated(5)`**
 
 ```ruby
 [#<TvShow:0x00007f4ad7977600

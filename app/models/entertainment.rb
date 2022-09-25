@@ -11,8 +11,8 @@ class Entertainment < ApplicationRecord
 
     # * business logics
     # RATINGS
-    scope :highest_ratings, -> (n=10) { order(ratings: :desc).limit(n)}
-    scope :lowest_ratings, -> (n=10) { order(ratings: :asc).limit(n)}
+    scope :highest_rated, -> (n=10) { order(ratings: :desc).limit(n)}
+    scope :lowest_rated, -> (n=10) { order(ratings: :asc).limit(n)}
     scope :ratings_between, -> (from, to) { where(ratings: from..to).order(ratings: :asc) }
 
     # RELEASE DATE
