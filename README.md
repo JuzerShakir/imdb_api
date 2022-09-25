@@ -58,7 +58,7 @@
 - [x] Users can also instantly instantiate data to the database via `rails db:seed` command.
 - [x] Provide business logic.
 
----
+## To get a detailed information about the schema and relationships between models, check out this [wiki](https://github.com/JuzerShakir/imdb_api/wiki).
 
 ## Running the App
 
@@ -176,7 +176,7 @@ curl --request DELETE --header "Content-Type: application/json" --data '{"identi
 
 ---
 
-## Via Seed
+### Via Seed
 
 The `lib/seed_data` folder contains 2 files, `movie_links.txt` & `tv-series_links.txt`, where each file contains links of Top 250 [Movies](https://www.imdb.com/chart/top/?ref_=nv_mv_250) and [TV-Series](https://www.imdb.com/chart/toptv/?ref_=nv_tvv_250) according to IMDb ratings respectively.
 
@@ -191,3 +191,5 @@ The `lib/seed_data` folder contains 2 files, `movie_links.txt` & `tv-series_link
 4. I have provided a constant named `N` in `seeds.rb` file which you can change to however many shows you want to populate in your database. **By default, I have set its value to `125` which means total shows executed will be 250, 125 from each file, which would take around ~33 mins to execute.**
 
 ---
+
+You can check out what scopes or class methods are available and their descriptions in this [wiki](https://github.com/JuzerShakir/imdb_api/wiki/Simple-Queries-with-Scopes). And you can also find some of the advanced queries given in SQL in this [wiki](https://github.com/JuzerShakir/imdb_api/wiki/Advanced-Queries-with-SQL).
