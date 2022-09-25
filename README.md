@@ -63,7 +63,7 @@
 - [x] Checks if the content of a URL is a Movie or TV-Series.
 - [x] Checks if the content can be rated by the users.
 - [x] If all checks pass then the data extraction process begins.
-- [x] Existing data can also be updated via `update` action.
+- [x] Able to interact with data via other CRUD action.
 - [x] Users can also instantly instantiate data to the database via `rails db:seed` command.
 - [x] Provide business logic.
 
