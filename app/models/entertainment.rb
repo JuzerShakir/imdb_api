@@ -11,15 +11,15 @@ class Entertainment < ApplicationRecord
 
     # * business logics
     # RATINGS
-    scope :highest_rated, -> n=10 { order(ratings: :desc, popularity: :desc).limit(n)}
-    scope :lowest_rated, -> n=10 { order(ratings: :asc, popularity: :desc).limit(n)}
+    scope :highest_rated, -> { order(ratings: :desc, popularity: :desc)}
+    scope :lowest_rated, -> { order(ratings: :asc, popularity: :desc)}
     scope :ratings_between, -> from, to { where(ratings: from..to).order(ratings: :asc, popularity: :desc) }
 
     # RELEASE DATE
     scope :presence_of_release_date, -> { where("release_date IS NOT NULL") }
 
-    scope :oldest_release, -> n=10 { presence_of_release_date.order(release_date: :asc).limit(n) }
-    scope :newest_release, -> n=10 { presence_of_release_date.order(release_date: :desc).limit(n) }
+    scope :oldest_release, -> { presence_of_release_date.order(release_date: :asc) }
+    scope :newest_release, -> { presence_of_release_date.order(release_date: :desc) }
 
     scope :released_in_year, -> year { where('extract(YEAR from release_date) = ?', year).order(release_date: :asc) }
     scope :released_in_years_between, -> from, to { where('extract(YEAR from release_date) BETWEEN ? AND ?', from, to).order(release_date: :asc) }
@@ -28,12 +28,12 @@ class Entertainment < ApplicationRecord
     scope :released_in_months_between, -> from, to { where('extract(MONTH from release_date) BETWEEN ? AND ?', from, to).order(release_date: :asc) }
 
     # ? accepts args frm 0-6 (Sun-Sat)
-    scope :released_in_day, -> day { where('extract(DOW from release_date) = ?', day ).order(release_date: :asc) }
-    scope :released_in_days_between, -> from, to { where('extract(DOW from release_date) BETWEEN ? AND ?', from, to).order(release_date: :asc) }
+    scope :released_in_day, -> day { where('extract(DOW from release_date) = ?', day ) }
+    scope :released_in_days_between, -> from, to { where('extract(DOW from release_date) BETWEEN ? AND ?', from, to) }
 
     # RUNTIME
-    scope :longest_runtime, -> n=10 { order(runtime: :desc, title: :asc).limit(n) }
-    scope :shortest_runtime, -> n=10 { order(runtime: :asc, title: :asc).limit(n) }
+    scope :longest_runtime, -> { order(runtime: :desc, title: :asc) }
+    scope :shortest_runtime, -> { order(runtime: :asc, title: :asc) }
     scope :runtime_between, -> from, to { where(runtime: from..to).order(runtime: :asc) }
 
     # POPULARITY
