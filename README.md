@@ -40,6 +40,7 @@
     - [POST request](#post-request)
     - [GET request](#get-request)
     - [PATCH request](#patch-request)
+    - [DELETE request](#delete-request)
   - [Via Seed](#via-seed)
 
 ---
