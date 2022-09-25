@@ -6,7 +6,7 @@ class Movie < Entertainment
     # REVENUE
     scope :presence_of_revenue, -> { where("revenue IS NOT NULL") }
     scope :highest_revenue, -> { presence_of_revenue.order(revenue: :desc) }
-    scope :lowest_revenue, -> n=10 { presence_of_revenue.order(revenue: :asc).limit(n) }
+    scope :lowest_revenue, -> { presence_of_revenue.order(revenue: :asc) }
 
     # BUDGET
     scope :presence_of_budget, -> { where("budget IS NOT NULL") }
