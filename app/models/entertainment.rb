@@ -11,9 +11,9 @@ class Entertainment < ApplicationRecord
 
     # * business logics
     # RATINGS
-    scope :highest_rated, -> n=10 { order(ratings: :desc).limit(n)}
-    scope :lowest_rated, -> n=10 { order(ratings: :asc).limit(n)}
-    scope :ratings_between, -> from, to { where(ratings: from..to).order(ratings: :asc) }
+    scope :highest_rated, -> n=10 { order(ratings: :desc, popularity: :desc).limit(n)}
+    scope :lowest_rated, -> n=10 { order(ratings: :asc, popularity: :desc).limit(n)}
+    scope :ratings_between, -> from, to { where(ratings: from..to).order(ratings: :asc, popularity: :desc) }
 
     # RELEASE DATE
     scope :presence_of_release_date, -> { where("release_date IS NOT NULL") }
