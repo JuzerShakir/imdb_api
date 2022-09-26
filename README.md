@@ -59,7 +59,9 @@
 - [x] Users can also instantly instantiate data to the database via `rails db:seed` command.
 - [x] Provide business logic.
 
-## To get a detailed information about the schema and relationships between models, check out this [wiki](https://github.com/JuzerShakir/imdb_api/wiki).
+To get a detailed information about the schema and relationships between models, check out this [wiki](https://github.com/JuzerShakir/imdb_api/wiki).
+
+---
 
 ## Running the App
 
