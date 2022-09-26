@@ -41,14 +41,14 @@ class Entertainment < ApplicationRecord
     scope :popularity_between, -> from, to { where(popularity: from..to).order(popularity: :desc) }
 
     # DIRECTORS
-    scope :all_shows_by_director, -> name { joins(:directors).where('directors.name LIKE ?', name) }
+    scope :by_director, -> name { joins(:directors).where('directors.name LIKE ?', name) }
 
     # GENRES
-    scope :all_shows_in_genre, -> name {  joins(:genres).where('genres.name LIKE ?', name) }
+    scope :in_genre, -> name {  joins(:genres).where('genres.name LIKE ?', name) }
 
     # PRODUCERS
-    scope :all_shows_by_producer, -> name {  joins(:producers).where('producers.name LIKE ?', name) }
+    scope :by_producer, -> name {  joins(:producers).where('producers.name LIKE ?', name) }
 
     # STARS
-    scope :all_shows_by_star, -> name {  joins(:stars).where('stars.name LIKE ?', name) }
+    scope :by_star, -> name {  joins(:stars).where('stars.name LIKE ?', name) }
 end
