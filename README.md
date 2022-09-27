@@ -20,6 +20,12 @@
   <a href="https://wakatime.com/badge/user/ccef187f-4308-4666-920d-d0a9a07d713a/project/509003f7-2b71-4958-be09-1a0d27b03a0c"><img src="https://wakatime.com/badge/user/ccef187f-4308-4666-920d-d0a9a07d713a/project/509003f7-2b71-4958-be09-1a0d27b03a0c.svg" alt="wakatime"></a>
 </div>
 
+<br>
+
+<div align="center">
+  <a href="https://www.buymeacoffee.com/juzershakir"> <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="juzershakir" /></a>
+</div>
+
 ---
 
 ## Table of Contents
@@ -192,9 +198,3 @@ The `lib/seed_data` folder contains 2 files, `movie_links.txt` & `tv-series_link
 ---
 
 You can check out what scopes or class methods are available and their descriptions in this [wiki](https://github.com/JuzerShakir/imdb_api/wiki/Simple-Queries-with-Scopes). And you can also find some of the advanced queries given in SQL in this [wiki](https://github.com/JuzerShakir/imdb_api/wiki/Advanced-Queries-with-SQL).
-
----
-
-<div align="center">
-  <a href="https://www.buymeacoffee.com/juzershakir"> <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="juzershakir" /></a>
-</div>
