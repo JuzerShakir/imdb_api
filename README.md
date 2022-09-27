@@ -1,8 +1,6 @@
-# IMDb API
-
-> A Rails API for extracting data of a Movie or Tv-Series via an IMDb link provided by the user.
-
----
+<div align="center">
+  <img src="public/assets/project_logo.png" />
+</div>
 
 <div align="center">
 
@@ -13,10 +11,6 @@
   <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white">
 
   <img src="https://img.shields.io/badge/redis-%23DD0031.svg?&style=for-the-badge&logo=redis&logoColor=white">
-</div>
-
-<div align="center">
-  <img src="public/assets/project_logo.png" />
 </div>
 
 <div align="center">
