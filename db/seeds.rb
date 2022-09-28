@@ -8,10 +8,10 @@ include SetFeatures
 N = 125                  # * Values acceptable between 1 to 250
 URLS_IN_A_GROUP = 30      # ! Do NOT set value greater than 30 to avoid robot confiramtion
 
-files = %w(movie_links.txt tv-series_links.txt)
+file_names = %w(movie_links tv-series_links)
 
-files.each do | file |
-    file_content = File.open("#{Dir.pwd}/lib/seed_data/#{file}")
+file_names.each do | file_name |
+    file_content = File.open("#{Dir.pwd}/lib/seed_data/#{file_name}.txt")
     all_urls = file_content.readlines.map(&:chomp)
     limited_urls = all_urls.first(N)
     groups_of_urls = limited_urls.in_groups_of(URLS_IN_A_GROUP, false)
