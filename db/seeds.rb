@@ -11,7 +11,7 @@ URLS_IN_A_GROUP = 30      # ! Do NOT set value greater than 30 to avoid robot co
 file_names = %w(movie_links tv-series_links)
 
 file_names.each do | file_name |
-file_content = File.open(Rails.root.join("lib", "seeds", "#{file_name}.txt")
+file_content = File.open(Rails.root.join("lib", "seeds", "#{file_name}.txt"))
     all_urls = file_content.readlines.map(&:chomp)
     limited_urls = all_urls.first(N)
     groups_of_urls = limited_urls.in_groups_of(URLS_IN_A_GROUP, false)
