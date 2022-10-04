@@ -29,7 +29,7 @@
         # * know the content type of the imdb page : movie, tv-series, episode or game and only support movie and tvseries types
         def content_type
             attrb = set_attr("hero-title-block__metadata")
-            extract_data(:ul, attrb, :text, :split, :first)
+            extract_data(:ul, attrb, :text, :lines, :first, :chomp)
         end
 
         def content_type_supported?
