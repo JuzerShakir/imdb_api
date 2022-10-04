@@ -147,7 +147,7 @@ sidekiq
 Performing a POST request by entering the correct URL of a Movie or TV-Series from IMDb website:
 
 ```bash
-curl --request POST --header "Content-Type: application/json" --data '{"url": "https://www.imdb.com/title/tt0944947/"}' http://localhost:3000/api/entertainment -v
+curl --request POST --header "Content-Type: application/json" --data '{"url": "https://www.imdb.com/title/tt0944947/"}' http://localhost:3000/api/v1/entertainment -v
 ```
 
 #### GET request
@@ -155,7 +155,7 @@ curl --request POST --header "Content-Type: application/json" --data '{"url": "h
 Performing a GET request with a valid IMDb ID which returns a JSON object of a Movie or Tv-Series:
 
 ```bash
-curl --request GET --header "Content-Type: application/json" --data '{"identifier":"tt0944947"}' http://localhost:3000/api/entertainment
+curl --request GET --header "Content-Type: application/json" --data '{"identifier":"tt0944947"}' http://localhost:3000/api/v1/entertainment
 ```
 
 #### PATCH request
@@ -163,7 +163,7 @@ curl --request GET --header "Content-Type: application/json" --data '{"identifie
 Performing a PATCH request to update an existing entry:
 
 ```bash
-curl --request PATCH --header "Content-Type: application/json" --data '{"identifier": "tt0944947"}' http://localhost:3000/api/entertainment -v
+curl --request PATCH --header "Content-Type: application/json" --data '{"identifier": "tt0944947"}' http://localhost:3000/api/v1/entertainment -v
 ```
 
 Which will update the following attributes: `ratings`, `popularity`, `budget`, `revenue`
@@ -173,7 +173,7 @@ Which will update the following attributes: `ratings`, `popularity`, `budget`, `
 Performing a DELETE request to delete an existing entry:
 
 ```bash
-curl --request DELETE --header "Content-Type: application/json" --data '{"identifier": "tt0944947"}' http://localhost:3000/api/entertainment -v
+curl --request DELETE --header "Content-Type: application/json" --data '{"identifier": "tt0944947"}' http://localhost:3000/api/v1/entertainment -v
 ```
 
 > > **NOTE**:
