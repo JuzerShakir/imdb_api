@@ -26,7 +26,8 @@ module SetFeatures
     end
 
     def set_show_values
-        @show = content_type == "TV" ? TvShow.new : Movie.new
+        # * "Tv Movie" types are considered as Movie types
+        @show = content_type.match?(/TV Series|TV Mini Series/) ? TvShow.new : Movie.new
         @show.url = @url
 
         set_attribute_values

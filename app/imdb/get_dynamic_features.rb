@@ -64,7 +64,7 @@ module GetDynamicFeatures
         end
 
         def check_runtime_validity(time)
-            if time.between?(0,60)
+            if time.between?(0,100)
                 time *= get_number_of_episodes
             else
                 time
