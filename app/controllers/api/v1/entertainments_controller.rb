@@ -18,7 +18,7 @@ module Api
 
             def show
                 if show_exists?
-                    render json: @show, status: :ok
+                    render json: { show: @show.useful_features }, status: :ok
                 else
                     render_error_of_no_id_exists
                 end

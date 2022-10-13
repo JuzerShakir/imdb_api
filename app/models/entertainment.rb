@@ -1,4 +1,7 @@
 class Entertainment < ApplicationRecord
+    # * Constants
+    RELATIONAL_MODELS = %w(genres stars producers directors)
+
     # * Associations
     has_and_belongs_to_many :genres
     has_and_belongs_to_many :stars
@@ -51,4 +54,27 @@ class Entertainment < ApplicationRecord
 
     # STARS
     scope :starring, -> name {  joins(:stars).where('stars.name LIKE ?', name) }
+
+    # returns all the useful features from the self and relational models
+    def useful_features
+        self.attributes.except(*unuseful).merge(names_of_relational_models)
+    end
+
+    private
+        # select useful features from entertainment model
+        def unuseful
+            unuseful_attributes = %w(created_at updated_at url identifier)
+            if self.type == "TvShow"
+                more_attributes = %w(budget revenue profit)
+                unuseful_attributes.concat(more_attributes)
+            end
+            unuseful_attributes
+        end
+
+        # selects only name field for all the relational models
+        def names_of_relational_models
+            RELATIONAL_MODELS.each_with_object({}) do | model, hash |
+                hash[model] = self.instance_eval(model).pluck(:name)
+            end
+        end
 end
