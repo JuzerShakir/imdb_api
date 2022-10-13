@@ -12,7 +12,7 @@ module Api
                     render json: { error: "show already exists!" }, status: :unprocessable_entity
                 else
                     CreateShowJob.perform_later(params[:url])
-                    render json: "Valid URL", status: :accepted
+                    render json: { success: "Valid URL" },  status: :accepted
                 end
             end
 
@@ -27,7 +27,7 @@ module Api
             def update
                 if show_exists?
                     UpdateShowJob.perform_later(@show)
-                    render json: "Features are updating", status: :ok
+                    render json: { success: "Features are updating" }, status: :ok
                 else
                     render_error_of_no_id_exists
                 end
