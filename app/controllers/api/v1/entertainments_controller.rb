@@ -3,7 +3,7 @@ module Api
         class EntertainmentsController < ApplicationController
             before_action :params_permit_url, only: :create
             before_action :params_permit_identifier, except: :create
-            before_action :get_show, except: :create
+            before_action :get_show
 
             def create
                 if invalid_url?
