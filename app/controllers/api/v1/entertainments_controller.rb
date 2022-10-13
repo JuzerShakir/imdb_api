@@ -65,9 +65,9 @@ module Api
                     @show = Entertainment.find_by(identifier:  params[:identifier] || params[:url].match(/(tt\d{7,8})/)[0] )
                 end
 
-            def show_exists?
-                @show
-            end
+                def show_exists?
+                    @show
+                end
         end
     end
 end
