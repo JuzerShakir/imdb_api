@@ -150,6 +150,10 @@ Performing a POST request by entering the correct URL of a Movie or TV-Series fr
 curl --request POST --header "Content-Type: application/json" --data '{"url": "https://www.imdb.com/title/tt0944947/"}' http://localhost:3000/api/v1/entertainment -v
 ```
 
+Or with [insomnia](https://insomnia.rest/)
+
+<img src="public/assets/post_request.png" />
+
 #### GET request
 
 Performing a GET request with a valid IMDb ID which returns a JSON object of a Movie or Tv-Series:
@@ -158,6 +162,10 @@ Performing a GET request with a valid IMDb ID which returns a JSON object of a M
 curl --request GET --header "Content-Type: application/json" --data '{"identifier":"tt0944947"}' http://localhost:3000/api/v1/entertainment
 ```
 
+Or with [insomnia](https://insomnia.rest/)
+
+<img src="public/assets/get_request.png" />
+
 #### PATCH request
 
 Performing a PATCH request to update an existing entry:
@@ -165,6 +173,10 @@ Performing a PATCH request to update an existing entry:
 ```bash
 curl --request PATCH --header "Content-Type: application/json" --data '{"identifier": "tt0944947"}' http://localhost:3000/api/v1/entertainment -v
 ```
+
+Or with [insomnia](https://insomnia.rest/)
+
+<img src="public/assets/patch_request.png" />
 
 Which will update the following attributes: `ratings`, `popularity`, `budget`, `revenue`
 
@@ -175,6 +187,10 @@ Performing a DELETE request to delete an existing entry:
 ```bash
 curl --request DELETE --header "Content-Type: application/json" --data '{"identifier": "tt0944947"}' http://localhost:3000/api/v1/entertainment -v
 ```
+
+Or with [insomnia](https://insomnia.rest/)
+
+<img src="public/assets/delete_request.png" />
 
 > > **NOTE**:
 > > An IMDb ID can be found in the link of the URL which is followed by the 'title' text in the link, for example: _`https://www.imdb.com/title/tt5052448`_, here **tt5052448** is a Unique IMDb ID for that Movie or TV-Series which I call an `identifier` in my project.
