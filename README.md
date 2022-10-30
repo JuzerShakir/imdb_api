@@ -16,7 +16,7 @@
 </div>
 
 <div align="center">
-  <img src="https://visitor-badge-reloaded.herokuapp.com/badge?page_id=juzershakir.imdb_api&color=000000&lcolor=000000&style=for-the-badge&logo=Github"/>
+  <img src="https://visitor-badge.glitch.me/badge?page_id=juzershakir.imdb_api&left_color=black&right_color=green&style=for-the-badge&logo=Github"/>
   <a href="https://wakatime.com/badge/user/ccef187f-4308-4666-920d-d0a9a07d713a/project/509003f7-2b71-4958-be09-1a0d27b03a0c"><img src="https://wakatime.com/badge/user/ccef187f-4308-4666-920d-d0a9a07d713a/project/509003f7-2b71-4958-be09-1a0d27b03a0c.svg" alt="wakatime"></a>
 </div>
 
