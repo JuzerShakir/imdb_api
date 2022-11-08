@@ -29,6 +29,12 @@
            attrb = set_attr("plot-xl")
            # @browser.window.maximize
            html = extract_data(:span, attrb, :html)
-           html.scan(/>([\S ]+)</).flatten.first
+           text = html.scan(/>([\S ]+)</).flatten.first
+
+           if text.include?("<!-- -->")
+            text.partition("<!-- -->").first
+           else
+            text
+           end
         end
     end
