@@ -1,7 +1,7 @@
 <div align="center">
   <img src="public/assets/project_logo.png" />
   <h2>IMDb API</h2>
-  <p>A Rails API for extracting data of a Movie or Tv-Series via an IMDb link provided by the user.</p>
+  <p>A REST API for extracting data of a Movie or Tv-Series from an IMDb website via the IMDb link provided by the user.</p>
 </div>
 
 <div align="center">
